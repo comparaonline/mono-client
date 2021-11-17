@@ -1,0 +1,51 @@
+{
+  "name": "@comparaonline/mono-client",
+  "version": "0.0.1",
+  "description": "Soap and rest connector",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "repository": "https://github.com/comparaonline/mono-client.git",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --fix",
+    "tester": "ts-node src/tester.ts"
+  },
+  "author": {
+    "name": "Rodrigo D. Cabral",
+    "email": "rcabral@comparaonline.com"
+  },
+  "license": "MIT",
+  "private": false,
+  "module": "true",
+  "files": [
+    "build"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "comparaonline",
+    "axios",
+    "rest",
+    "soap"
+  ],
+  "dependencies": {
+    "axios": "^0.24.0",
+    "soap": "^0.43.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^8.0.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
