@@ -1,0 +1,204 @@
+[
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 1687,
+          "pages": 85,
+          "page": 1,
+          "limit": 20,
+          "links": {
+            "previous": null,
+            "current": "https://gorest.co.in/public/v1/users?page=1",
+            "next": "https://gorest.co.in/public/v1/users?page=2"
+          }
+        }
+      },
+      "data": [
+        {
+          "id": 1851,
+          "name": "Gordienko Katya",
+          "email": "13gordienkoi@gmail.com",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 2731,
+          "name": "Tais",
+          "email": "tais123@teste.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 2732,
+          "name": "API Monitoring:gft0f (Updated)",
+          "email": "apimonitoringgft0f@synthetic.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2354,
+          "name": "Supertest_6903_3",
+          "email": "Supertest_6903_3@email.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1528,
+          "name": "Arun KUMAR",
+          "email": "akakakak@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1673,
+          "name": "Eduardo Crona V",
+          "email": "Sunny.Terry@example.org",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 1674,
+          "name": "Beth Buckridge",
+          "email": "Rachelle_Dicki23@example.net",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2356,
+          "name": "Supertest_9738_5",
+          "email": "Supertest_9738_5@email.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1875,
+          "name": "Ram Shyam",
+          "email": "shyam321@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1876,
+          "name": "Ram Shyam",
+          "email": "shyam321@gmail.data",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2357,
+          "name": "Supertest_10649_6",
+          "email": "Supertest_10649_6@email.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2117,
+          "name": "delete",
+          "email": "deletetest@15ce.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2358,
+          "name": "Supertest_11036_7",
+          "email": "Supertest_11036_7@email.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2359,
+          "name": "Supertest_16166_8",
+          "email": "Supertest_16166_8@email.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1880,
+          "name": "Ram Shyam",
+          "email": "shyam321@gmail.dat",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2121,
+          "name": "Test",
+          "email": "e9a53bb9-8afe-4c7f-890e-0ba9189e1c64@abc.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 71,
+          "name": "Anwesha Patil",
+          "email": "anwesha_patil@haag-schulist.co",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 70,
+          "name": "Shridevi Dhawan Jr.",
+          "email": "shridevi_jr_dhawan@bashirian.info",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 1680,
+          "name": "manda.balistreri",
+          "email": "harold.mayer@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 1683,
+          "name": "veta.watsica",
+          "email": "wilton.frami@hotmail.com",
+          "gender": "male",
+          "status": "active"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Thu, 18 Nov 2021 20:59:03 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "ETag",
+      "W/\"3010c6d09755ae88498c28d0303d4545\"",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "X-Request-Id",
+      "ce3e691e-acfc-46a7-ae64-a1bd504c103e",
+      "X-Runtime",
+      "0.007068",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  }
+]

@@ -61,6 +61,9 @@ export class SoapClient extends BaseClient {
     if (client[params.path] == null) {
       throw new MissingSoapMethod(params.path);
     }
+    if (this.config.type === 'soap' && this.config.ssl != null) {
+      client.setSecurity(this.config.ssl);
+    }
     const results = await this.soapRequest(client, params.path, params.body);
     return {
       body: results.result,

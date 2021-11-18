@@ -1,6 +1,8 @@
 import { Method } from 'axios';
+import { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
+export { ClientSSLSecurity, ClientSSLSecurityPFX };
 
-export type Params = { [key: string]: string };
+export type Params = { [key: string]: string | number };
 
 export enum StatusCode {
   S4XX = '4XX',
@@ -58,7 +60,7 @@ export interface Request {
   method?: Method;
   pathParams?: Params;
   queryParams?: Params;
-  body: any;
+  body?: any;
   headers?: Headers;
 }
 
@@ -98,11 +100,15 @@ interface MCBaseClientConfig {
 interface BaseClientConfigSoap extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
+  ssl?: ClientSSLSecurity | ClientSSLSecurityPFX;
 }
 
 interface BaseClientConfigRest extends MCBaseClientConfig {
   type: 'rest';
   baseUrl?: string;
+  ssl?: {
+    rejectUnauthorized: boolean;
+  };
 }
 
 export type BaseClientConfig = BaseClientConfigSoap | BaseClientConfigRest;
