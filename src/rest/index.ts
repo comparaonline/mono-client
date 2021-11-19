@@ -12,10 +12,11 @@ export class RestClient extends Client {
     if (baseUrl == null) {
       throw new ClientBadConfiguration('Missing baseUrl and overwriteBaseUrl');
     }
+    const url = this.generateUrl(baseUrl, params.path, params.pathParams);
     try {
       const response = await axios({
+        url,
         method: params.method,
-        url: this.generateUrl(baseUrl, params.path, params.pathParams),
         params: params.queryParams,
         data: params.body,
         headers: params.headers
@@ -30,7 +31,8 @@ export class RestClient extends Client {
       return {
         body: error.response?.data,
         headers: error.response?.headers ?? {},
-        statusCode: error.response?.status ?? 500
+        statusCode: error.response?.status ?? 500,
+        message: error.message
       };
     }
   }

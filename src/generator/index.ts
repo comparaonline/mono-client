@@ -2,19 +2,24 @@ import { MonoClient } from '../client';
 import { BaseClientConfig, Callback } from '../interfaces';
 
 interface Params {
-  serviceId?: string | number;
+  businessUnit?: string;
   callback?: Callback;
 }
 
 export class MonoClientGenerator {
   constructor(private params: Params) {}
 
-  get(params: BaseClientConfig, requestId?: string | number): MonoClient {
+  get(
+    params: BaseClientConfig,
+    serviceId?: string | number,
+    requestId?: string | number
+  ): MonoClient {
     return new MonoClient({
       ...params,
       extra: {
         requestId,
-        serviceId: this.params.serviceId
+        serviceId: serviceId,
+        businessUnit: this.params.businessUnit
       },
       callback: this.params.callback
     });

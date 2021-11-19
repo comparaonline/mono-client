@@ -68,10 +68,12 @@ export interface Response {
   body: any;
   headers: Headers;
   statusCode: number;
+  message?: string;
 }
 
 export interface Extra {
   requestId?: string | number;
+  businessUnit?: string;
   serviceId?: string | number;
 }
 
