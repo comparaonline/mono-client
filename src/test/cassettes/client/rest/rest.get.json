@@ -8,8 +8,8 @@
     "response": {
       "meta": {
         "pagination": {
-          "total": 1687,
-          "pages": 85,
+          "total": 1580,
+          "pages": 79,
           "page": 1,
           "limit": 20,
           "links": {
@@ -21,144 +21,144 @@
       },
       "data": [
         {
-          "id": 1851,
-          "name": "Gordienko Katya",
-          "email": "13gordienkoi@gmail.com",
-          "gender": "female",
-          "status": "inactive"
-        },
-        {
-          "id": 2731,
-          "name": "Tais",
-          "email": "tais123@teste.com",
+          "id": 2686,
+          "name": "TkachQA",
+          "email": "fkj98j@ce.com",
           "gender": "female",
           "status": "active"
         },
         {
-          "id": 2732,
-          "name": "API Monitoring:gft0f (Updated)",
-          "email": "apimonitoringgft0f@synthetic.com",
+          "id": 2687,
+          "name": "Herp Derp",
+          "email": "herp.derperson@derp.com",
           "gender": "male",
           "status": "active"
         },
         {
-          "id": 2354,
-          "name": "Supertest_6903_3",
-          "email": "Supertest_6903_3@email.com",
+          "id": 2253,
+          "name": "Anil",
+          "email": "anil31@ccbp.com",
           "gender": "male",
           "status": "active"
         },
         {
-          "id": 1528,
-          "name": "Arun KUMAR",
-          "email": "akakakak@gmail.com",
+          "id": 2266,
+          "name": "Anil",
+          "email": "sandeepreddy5232@gmail.com",
           "gender": "male",
           "status": "active"
         },
         {
-          "id": 1673,
-          "name": "Eduardo Crona V",
-          "email": "Sunny.Terry@example.org",
-          "gender": "female",
-          "status": "inactive"
-        },
-        {
-          "id": 1674,
-          "name": "Beth Buckridge",
-          "email": "Rachelle_Dicki23@example.net",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2356,
-          "name": "Supertest_9738_5",
-          "email": "Supertest_9738_5@email.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 1875,
-          "name": "Ram Shyam",
-          "email": "shyam321@gmail.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 1876,
-          "name": "Ram Shyam",
-          "email": "shyam321@gmail.data",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2357,
-          "name": "Supertest_10649_6",
-          "email": "Supertest_10649_6@email.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2117,
-          "name": "delete",
-          "email": "deletetest@15ce.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2358,
-          "name": "Supertest_11036_7",
-          "email": "Supertest_11036_7@email.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2359,
-          "name": "Supertest_16166_8",
-          "email": "Supertest_16166_8@email.com",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 1880,
-          "name": "Ram Shyam",
-          "email": "shyam321@gmail.dat",
-          "gender": "male",
-          "status": "active"
-        },
-        {
-          "id": 2121,
+          "id": 2272,
           "name": "Test",
-          "email": "e9a53bb9-8afe-4c7f-890e-0ba9189e1c64@abc.com",
+          "email": "test967r4r@gmail.com",
           "gender": "male",
           "status": "active"
         },
         {
-          "id": 71,
-          "name": "Anwesha Patil",
-          "email": "anwesha_patil@haag-schulist.co",
+          "id": 75,
+          "name": "Arnesh Khanna MD",
+          "email": "khanna_arnesh_md@bergnaum-kuphal.com",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 77,
+          "name": "Deeptimoyee Adiga",
+          "email": "adiga_deeptimoyee@langosh.co",
           "gender": "female",
           "status": "inactive"
         },
         {
-          "id": 70,
-          "name": "Shridevi Dhawan Jr.",
-          "email": "shridevi_jr_dhawan@bashirian.info",
+          "id": 78,
+          "name": "Lakshmidhar Talwar Sr.",
+          "email": "sr_talwar_lakshmidhar@leffler.net",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 79,
+          "name": "Charumati Adiga CPA",
+          "email": "cpa_charumati_adiga@marquardt.name",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 80,
+          "name": "Maheswar Iyer",
+          "email": "maheswar_iyer@wolf.name",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 81,
+          "name": "Shivakari Butt Sr.",
+          "email": "sr_butt_shivakari@oconnell.name",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 82,
+          "name": "Vrinda Varrier III",
+          "email": "varrier_iii_vrinda@waters-pagac.net",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 83,
+          "name": "Jaimini Patil",
+          "email": "patil_jaimini@lynch-metz.org",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 84,
+          "name": "Mina Chattopadhyay",
+          "email": "chattopadhyay_mina@klein.info",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 85,
+          "name": "Fr. Chanakya Nayar",
+          "email": "fr_nayar_chanakya@stark-cummerata.co",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 86,
+          "name": "Lila Devar",
+          "email": "devar_lila@watsica-halvorson.biz",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 87,
+          "name": "Sarla Kaur",
+          "email": "kaur_sarla@fadel.io",
           "gender": "male",
           "status": "inactive"
         },
         {
-          "id": 1680,
-          "name": "manda.balistreri",
-          "email": "harold.mayer@gmail.com",
-          "gender": "male",
-          "status": "active"
+          "id": 88,
+          "name": "Shubha Bandopadhyay",
+          "email": "bandopadhyay_shubha@considine-johnson.io",
+          "gender": "female",
+          "status": "inactive"
         },
         {
-          "id": 1683,
-          "name": "veta.watsica",
-          "email": "wilton.frami@hotmail.com",
+          "id": 89,
+          "name": "Chitraksh Sinha",
+          "email": "sinha_chitraksh@schmidt.co",
           "gender": "male",
-          "status": "active"
+          "status": "inactive"
+        },
+        {
+          "id": 90,
+          "name": "Anang Kaul",
+          "email": "anang_kaul@crooks.biz",
+          "gender": "female",
+          "status": "inactive"
         }
       ]
     },
@@ -166,7 +166,7 @@
       "Server",
       "nginx",
       "Date",
-      "Thu, 18 Nov 2021 20:59:03 GMT",
+      "Fri, 19 Nov 2021 19:45:08 GMT",
       "Content-Type",
       "application/json; charset=utf-8",
       "Transfer-Encoding",
@@ -188,13 +188,276 @@
       "Referrer-Policy",
       "strict-origin-when-cross-origin",
       "ETag",
-      "W/\"3010c6d09755ae88498c28d0303d4545\"",
+      "W/\"31d8e0dd5605d90a32e71328639f17dd\"",
       "Cache-Control",
       "max-age=0, private, must-revalidate",
       "X-Request-Id",
-      "ce3e691e-acfc-46a7-ae64-a1bd504c103e",
+      "9795f121-baca-4c84-80f2-670d42514c7b",
       "X-Runtime",
-      "0.007068",
+      "0.006292",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  },
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users?page=2",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 1580,
+          "pages": 79,
+          "page": 2,
+          "limit": 20,
+          "links": {
+            "previous": "https://gorest.co.in/public/v1/users?page=1",
+            "current": "https://gorest.co.in/public/v1/users?page=2",
+            "next": "https://gorest.co.in/public/v1/users?page=3"
+          }
+        }
+      },
+      "data": [
+        {
+          "id": 91,
+          "name": "Preity Shukla",
+          "email": "shukla_preity@parker.co",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 92,
+          "name": "Chandraswaroopa Shukla Sr.",
+          "email": "sr_chandraswaroopa_shukla@steuber-lehner.org",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 93,
+          "name": "Arun Guha",
+          "email": "arun_guha@kulas-kozey.co",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 94,
+          "name": "Jaimini Iyengar DVM",
+          "email": "jaimini_dvm_iyengar@stiedemann-schmitt.name",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 95,
+          "name": "Balagopal Chattopadhyay",
+          "email": "chattopadhyay_balagopal@roob.org",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 96,
+          "name": "Gov. Bilwa Iyer",
+          "email": "bilwa_iyer_gov@blanda.co",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 97,
+          "name": "Bandhu Bharadwaj",
+          "email": "bandhu_bharadwaj@fahey.net",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 98,
+          "name": "Chakradhar Mehrotra",
+          "email": "mehrotra_chakradhar@stokes-wunsch.com",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 99,
+          "name": "Rev. Achyut Butt",
+          "email": "rev_butt_achyut@frami-leffler.net",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 100,
+          "name": "Chaaruchandra Kaur",
+          "email": "kaur_chaaruchandra@mcglynn.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 101,
+          "name": "Vaijayanthi Dubashi",
+          "email": "vaijayanthi_dubashi@cronin-bode.co",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 102,
+          "name": "Pres. Umang Trivedi",
+          "email": "pres_umang_trivedi@mayert.com",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 103,
+          "name": "Asha Agarwal",
+          "email": "asha_agarwal@okuneva.info",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 104,
+          "name": "Anurag Pandey V",
+          "email": "pandey_v_anurag@mclaughlin.co",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 105,
+          "name": "Chaturbhuj Iyer",
+          "email": "chaturbhuj_iyer@hoeger.biz",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 106,
+          "name": "Tapan Banerjee",
+          "email": "tapan_banerjee@vandervort.io",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 107,
+          "name": "Rameshwar Guneta",
+          "email": "guneta_rameshwar@rosenbaum-nolan.io",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 108,
+          "name": "Aagneya Chaturvedi Jr.",
+          "email": "jr_aagneya_chaturvedi@kuphal.net",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 109,
+          "name": "Aagney Gill",
+          "email": "gill_aagney@romaguera.net",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 110,
+          "name": "Yogendra Verma",
+          "email": "yogendra_verma@gulgowski.name",
+          "gender": "female",
+          "status": "inactive"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Fri, 19 Nov 2021 19:45:10 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "ETag",
+      "W/\"32808e72a53d96b87c0bd555a73152eb\"",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "X-Request-Id",
+      "44117765-5d69-490b-b6fb-ed9b1874aae5",
+      "X-Runtime",
+      "0.007272",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  },
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users/1/posts",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 0,
+          "pages": 0,
+          "page": 1,
+          "limit": 20,
+          "links": {
+            "previous": null,
+            "current": null,
+            "next": null
+          }
+        }
+      },
+      "data": []
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Fri, 19 Nov 2021 19:45:11 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "ETag",
+      "W/\"996e3e39561b73e0aaf72fec3fa2ca2d\"",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "X-Request-Id",
+      "abb2088f-800e-4d5f-a576-1f226aeed75f",
+      "X-Runtime",
+      "0.006085",
       "Strict-Transport-Security",
       "max-age=63072000; includeSubDomains",
       "Vary",
