@@ -46,6 +46,7 @@ export class MonoClient {
       }
       return true;
     }
+    /* istanbul ignore next */
     return false;
   }
   private isSuccessful(response: Response): boolean {
@@ -69,6 +70,7 @@ export class MonoClient {
       this.config.callback(request, response, {
         requestId: this.config.extra?.requestId,
         serviceId: this.config.extra?.serviceId,
+        businessUnit: this.config.extra?.businessUnit,
         requestDate: startDate,
         requestTime: Date.now() - startDate.getTime(),
         attempt: attempt + 1,

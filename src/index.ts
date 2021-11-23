@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { MonoClient } from './client';
 export { MonoClientGenerator } from './generator';
 export {

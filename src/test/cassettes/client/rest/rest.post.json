@@ -1,0 +1,49 @@
+[
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "POST",
+    "path": "/public/v1/users",
+    "body": "",
+    "status": 401,
+    "response": {
+      "meta": null,
+      "data": {
+        "message": "Authentication failed"
+      }
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Tue, 23 Nov 2021 18:21:10 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "Cache-Control",
+      "no-cache",
+      "X-Request-Id",
+      "cbb75498-c2c1-4f92-aca7-c9548cedfa24",
+      "X-Runtime",
+      "0.001738",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  }
+]

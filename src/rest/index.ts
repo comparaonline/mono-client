@@ -14,7 +14,7 @@ export class RestClient extends Client {
     }
     const url = this.generateUrl(baseUrl, params.path, params.pathParams);
     try {
-      const response = await axios({
+      const response = await axios.request({
         url,
         method: params.method,
         params: params.queryParams,

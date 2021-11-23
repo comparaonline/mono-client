@@ -89,7 +89,6 @@ export interface Retry {
   on?: StatusCode[];
   notOn?: StatusCode[];
   callbackRetry?: (request: Request, response: Response) => boolean;
-  extra?: Extra;
 }
 
 export type Callback = (request: Request, response: Response, info: Info) => Promise<void> | void;
