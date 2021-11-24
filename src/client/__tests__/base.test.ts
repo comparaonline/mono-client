@@ -94,7 +94,11 @@ describe('Mono client', () => {
             resolve({
               body: '',
               headers: {},
-              statusCode: 500
+              statusCode: 500,
+              raw: {
+                request: '',
+                response: ''
+              }
             });
           });
         });
@@ -125,7 +129,11 @@ describe('Mono client', () => {
                 counter: firstRetryCallbackCounter
               },
               headers: {},
-              statusCode: 500
+              statusCode: 500,
+              raw: {
+                request: '',
+                response: ''
+              }
             });
           });
         });
@@ -154,7 +162,11 @@ describe('Mono client', () => {
             resolve({
               body: 'Happy',
               headers: {},
-              statusCode: 500
+              statusCode: 500,
+              raw: {
+                request: '',
+                response: ''
+              }
             });
           });
         });

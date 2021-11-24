@@ -4,6 +4,7 @@ import { ClientBadConfiguration, MissingPathParameter, RequestFail } from '../..
 import { describeRecording } from '../../test/helpers';
 
 const CASSETTES_PATH = 'client/rest';
+const RESPONSE_DATA = 'I am text';
 
 describe('Rest client', () => {
   describe('basic config', () => {
@@ -60,19 +61,51 @@ describe('Rest client', () => {
       },
       CASSETTES_PATH
     );
-    describeRecording(
-      'POST',
-      () => {
-        it('Should create an user', async () => {
-          const req = client.request<any>({
-            path: '/public/v1/users',
-            method: 'POST'
+    describe('POST', () => {
+      it('Should create an user', async () => {
+        jest.spyOn(axios, 'request').mockImplementation(() => {
+          return new Promise((resolve) => {
+            resolve({
+              data: RESPONSE_DATA,
+              headers: {},
+              status: 201
+            });
           });
-          await expect(req).rejects.toThrowError(RequestFail);
         });
-      },
-      CASSETTES_PATH
-    );
+        const data = await client.request<any>({
+          path: '/public/v1/users',
+          method: 'POST',
+          body: {
+            data: 'empty'
+          }
+        });
+        expect(data.body).toBe(RESPONSE_DATA);
+        jest.restoreAllMocks();
+      });
+
+      it("Shouldn't create an user", async () => {
+        jest.spyOn(axios, 'request').mockImplementation(() => {
+          return new Promise((resolve, reject) => {
+            reject({
+              response: {
+                data: {},
+                headers: {},
+                status: 403
+              }
+            });
+          });
+        });
+        const req = client.request<any>({
+          path: '/public/v1/users',
+          method: 'POST',
+          body: {
+            data: 'empty'
+          }
+        });
+        await expect(req).rejects.toThrowError(RequestFail);
+        jest.restoreAllMocks();
+      });
+    });
     describeRecording(
       'Errors',
       () => {
@@ -119,7 +152,16 @@ describe('Rest client', () => {
         await expect(req).rejects.toThrowError(RequestFail);
         expect(callback).toHaveBeenCalledWith(
           { path: '/api/mocked-with-jest' },
-          { body: undefined, headers: {}, message: undefined, statusCode: 500 },
+          {
+            body: undefined,
+            headers: {},
+            message: undefined,
+            statusCode: 500,
+            raw: {
+              request: '',
+              response: ''
+            }
+          },
           {
             attempt: 1,
             businessUnit: undefined,
@@ -130,6 +172,13 @@ describe('Rest client', () => {
             serviceId: undefined
           }
         );
+        const reqWithBody = client.request({
+          path: '/api/mocked-with-jest',
+          body: {
+            data: 'empty'
+          }
+        });
+        await expect(reqWithBody).rejects.toThrowError(RequestFail);
         jest.restoreAllMocks();
       });
     });

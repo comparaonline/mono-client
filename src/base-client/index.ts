@@ -1,4 +1,4 @@
-import { ClientConfig, Request, Response, Params } from '../interfaces';
+import { ClientConfig, MonoClientRequest, MonoClientResponse, Params } from '../interfaces';
 import { MissingPathParameter } from '../exceptions';
 
 export abstract class Client {
@@ -15,5 +15,5 @@ export abstract class Client {
     }
     return baseUrl;
   }
-  abstract request(params: Request): Promise<Response>;
+  abstract request(params: MonoClientRequest): Promise<MonoClientResponse>;
 }
