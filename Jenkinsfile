@@ -1,22 +1,28 @@
 pipeline {
   agent any
   options {
-    timeout(time: 1, unit: 'HOURS')
+    timeout(time: 15, unit: 'MINUTES')
   }
   stages {
     stage('Prepare') {
       steps {
-        sh 'yarn install'
+        nvm("v14.17.0") {
+          sh 'yarn install'
+        }
       }
     }
     stage('Build') {
         steps {
+          nvm("v14.17.0") {
             sh 'yarn build'
+          }
         }
     }
     stage('Test') {
         steps {
+          nvm("v14.17.0") {
             sh 'yarn test'
+          }
         }
     }
     stage('Publish') {
