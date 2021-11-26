@@ -77,6 +77,7 @@ export class MonoClient<
   }: RequestAttempt): Promise<TemplateResponse<T>> {
     const startDate = new Date();
     const response = await this.client.request(request as any);
+    const isSuccessful = this.isSuccessful(response);
     if (this.config.callback != null) {
       this.config.callback(request, response, {
         requestId: this.config.extra?.requestId,
@@ -85,10 +86,10 @@ export class MonoClient<
         requestDate: startDate,
         requestTime: Date.now() - startDate.getTime(),
         attempt: attempt + 1,
-        isSuccessful: this.isSuccessful(response)
+        isSuccessful
       });
     }
-    if (this.isSuccessful(response)) {
+    if (isSuccessful) {
       return response;
     }
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
