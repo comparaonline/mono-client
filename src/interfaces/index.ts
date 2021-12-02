@@ -1,6 +1,5 @@
 import { Method } from 'axios';
 import { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
-export { ClientSSLSecurity, ClientSSLSecurityPFX };
 
 export type Params = { [key: string]: string | number };
 
@@ -53,10 +52,16 @@ export interface Headers {
   [key: string]: string;
 }
 
-export interface Request {
+export interface SoapRequest {
+  body: object;
+  overwriteWsdl?: string;
+  headers?: Headers;
+  method: string;
+}
+
+export interface RestRequest {
   path: string;
   overwriteBaseUrl?: string;
-  overwriteWsdl?: string;
   method?: Method;
   pathParams?: Params;
   queryParams?: Params;
@@ -64,14 +69,22 @@ export interface Request {
   headers?: Headers;
 }
 
-export interface Response {
+export type MonoClientRequest = SoapRequest | RestRequest;
+
+export interface MonoClientResponse {
   body: any;
   headers: Headers;
   statusCode: number;
+  message?: string;
+  raw: {
+    request: string;
+    response: string;
+  };
 }
 
 export interface Extra {
   requestId?: string | number;
+  businessUnit?: string;
   serviceId?: string | number;
 }
 
@@ -86,24 +99,27 @@ export interface Retry {
   maxRetry: number;
   on?: StatusCode[];
   notOn?: StatusCode[];
-  callbackRetry?: (request: Request, response: Response) => boolean;
-  extra?: Extra;
+  callbackRetry?: (request: MonoClientRequest, response: MonoClientResponse) => boolean;
 }
 
-export type Callback = (request: Request, response: Response, info: Info) => Promise<void> | void;
+export type Callback = (
+  request: MonoClientRequest,
+  response: MonoClientResponse,
+  info: Info
+) => Promise<void> | void;
 
 interface MCBaseClientConfig {
   retry?: Retry;
-  isSuccessfulCallback?: (response: Response) => boolean;
+  isSuccessfulCallback?: (response: MonoClientResponse) => boolean;
 }
 
-interface BaseClientConfigSoap extends MCBaseClientConfig {
+export interface SoapBaseClientConfig extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
   ssl?: ClientSSLSecurity | ClientSSLSecurityPFX;
 }
 
-interface BaseClientConfigRest extends MCBaseClientConfig {
+export interface RestBaseClientConfig extends MCBaseClientConfig {
   type: 'rest';
   baseUrl?: string;
   ssl?: {
@@ -111,9 +127,14 @@ interface BaseClientConfigRest extends MCBaseClientConfig {
   };
 }
 
-export type BaseClientConfig = BaseClientConfigSoap | BaseClientConfigRest;
-
-export type ClientConfig = BaseClientConfig & {
+interface ExtendedConfig {
   callback?: Callback;
   extra?: Extra;
-};
+}
+
+export type BaseClientConfig = SoapBaseClientConfig | RestBaseClientConfig;
+
+export type SoapClientConfig = SoapBaseClientConfig & ExtendedConfig;
+export type RestClientConfig = RestBaseClientConfig & ExtendedConfig;
+
+export type ClientConfig = SoapClientConfig | RestClientConfig;

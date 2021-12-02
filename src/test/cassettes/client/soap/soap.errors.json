@@ -1,0 +1,30 @@
+[
+  {
+    "scope": "http://www.dneonline.com:80",
+    "method": "POST",
+    "path": "/calculator.asmx",
+    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:tm=\"http://microsoft.com/wsdl/mime/textMatching/\" xmlns:tns=\"http://tempuri.org/\"><soap:Header></soap:Header><soap:Body><Divide xmlns=\"http://tempuri.org/\"><IntA>1</IntA><IntB>0</IntB></Divide></soap:Body></soap:Envelope>",
+    "status": 500,
+    "response": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><soap:Fault><faultcode>soap:Server</faultcode><faultstring>System.Web.Services.Protocols.SoapException: Server was unable to process request. ---&gt; System.OverflowException: Arithmetic operation resulted in an overflow.\r\n   at Calculator.Divide(Int32 intA, Int32 intB) in G:\\PleskVhosts\\dneonline.com\\httpdocs\\Calculator.asmx:line 19\r\n   --- End of inner exception stack trace ---</faultstring><detail /></soap:Fault></soap:Body></soap:Envelope>",
+    "rawHeaders": [
+      "Cache-Control",
+      "private",
+      "Content-Type",
+      "text/xml; charset=utf-8",
+      "Server",
+      "Microsoft-IIS/8.0",
+      "X-AspNet-Version",
+      "2.0.50727",
+      "X-Powered-By",
+      "ASP.NET",
+      "X-Powered-By-Plesk",
+      "PleskWin",
+      "Date",
+      "Wed, 24 Nov 2021 17:38:20 GMT",
+      "Connection",
+      "close",
+      "Content-Length",
+      "665"
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-import { Request, Response } from '../interfaces';
+import { MonoClientRequest, MonoClientResponse } from '../interfaces';
 
 export class InvalidMaxRetry extends Error {
   constructor(config: number) {
@@ -13,7 +13,7 @@ export class MissingPathParameter extends Error {
 }
 
 export class RequestFail extends Error {
-  constructor(public request: Request, public response: Response) {
+  constructor(public request: MonoClientRequest, public response: MonoClientResponse) {
     super(`Request Fail - ${response.statusCode} - ${response.body}`);
   }
 }

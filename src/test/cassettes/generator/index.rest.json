@@ -1,0 +1,204 @@
+[
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 5066,
+          "pages": 254,
+          "page": 1,
+          "limit": 20,
+          "links": {
+            "previous": null,
+            "current": "https://gorest.co.in/public/v1/users?page=1",
+            "next": "https://gorest.co.in/public/v1/users?page=2"
+          }
+        }
+      },
+      "data": [
+        {
+          "id": 5576,
+          "name": "JohnDoe",
+          "email": "JohnDoe1637759880462@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 5891,
+          "name": "Prajyot Urkude",
+          "email": "h03ejjji3a@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 5901,
+          "name": "Prajyot Urkude",
+          "email": "q3d7evjbn7@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 5902,
+          "name": "Prajyot Urkude",
+          "email": "8e46ouutr7@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 5904,
+          "name": "Prajyot Urkude",
+          "email": "rkicwtang2@gmail.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 60,
+          "name": "Oormila Desai",
+          "email": "oormila_desai@funk-langworth.biz",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 61,
+          "name": "Mukul Rana",
+          "email": "rana_mukul@kub.io",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 62,
+          "name": "Miss Bhushan Khanna",
+          "email": "bhushan_khanna_miss@koelpin.org",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 64,
+          "name": "Deeptendu Arora",
+          "email": "arora_deeptendu@swift-torphy.org",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 67,
+          "name": "Gov. Hiranmaya Patil",
+          "email": "gov_patil_hiranmaya@goyette-schiller.net",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 68,
+          "name": "Gopal Singh CPA",
+          "email": "gopal_cpa_singh@murray.info",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 69,
+          "name": "Anjaneya Pandey PhD",
+          "email": "anjaneya_phd_pandey@aufderhar.biz",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 70,
+          "name": "Pramila Nehru",
+          "email": "pramila_nehru@lakin.info",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 71,
+          "name": "Bhargava Khan",
+          "email": "khan_bhargava@bode.org",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 72,
+          "name": "Tara Trivedi",
+          "email": "tara_trivedi@wiegand.org",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 73,
+          "name": "Kumuda Tandon",
+          "email": "kumuda_tandon@luettgen-douglas.net",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 23,
+          "name": "devi",
+          "email": "mahi@gmail.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 1704,
+          "name": "Michael Walls",
+          "email": "stephanie54@example.org",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 1705,
+          "name": "Anthony Young",
+          "email": "jerryfisher@example.com",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 9,
+          "name": "Raj",
+          "email": "raj@gmail.com",
+          "gender": "male",
+          "status": "active"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Wed, 24 Nov 2021 20:33:57 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "ETag",
+      "W/\"6ba25972f6ecae54ce3461c4f5efb191\"",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "X-Request-Id",
+      "49e275c7-6d84-4ef1-81bb-a31e03f5c766",
+      "X-Runtime",
+      "0.007610",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  }
+]

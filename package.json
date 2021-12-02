@@ -1,10 +1,13 @@
 {
   "name": "@comparaonline/mono-client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Soap and rest connector",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": "https://github.com/comparaonline/mono-client.git",
+  "engines": {
+    "node": ">=14.17.0"
+  },
   "scripts": {
     "build": "tsc",
     "lint": "eslint src --fix",
@@ -36,10 +39,12 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.10",
+    "@types/sax": "^1.2.3",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
-    "eslint": "^8.0.1",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint": "8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",

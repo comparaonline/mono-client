@@ -25,8 +25,8 @@ export function describeRecording(
   const fullPath = join(__dirname, '..', 'cassettes', path, `${dir}.${name}.json`);
   const recorder = new HttpRecorder(fullPath);
   describe(description, () => {
-    beforeEach(() => recorder.start());
-    afterEach(() => recorder.stop(true));
+    beforeAll(() => recorder.start());
+    afterAll(() => recorder.stop(true));
     cases(recorder);
   });
 }

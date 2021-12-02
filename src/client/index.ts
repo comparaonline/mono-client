@@ -1,21 +1,32 @@
 import { SoapClient } from '../soap';
 import { RestClient } from '../rest';
-import { ClientConfig, Request, Response, StatusCode } from '../interfaces';
+import {
+  RestClientConfig,
+  SoapClientConfig,
+  MonoClientRequest,
+  RestRequest,
+  SoapRequest,
+  MonoClientResponse,
+  StatusCode
+} from '../interfaces';
 import { InvalidMaxRetry, RequestFail } from '../exceptions';
 
-interface TemplateResponse<T> extends Omit<Response, 'body'> {
+interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
 }
 
 interface RequestAttempt {
-  request: Request;
+  request: MonoClientRequest;
   maxAttempt: number;
   attempt: number;
 }
 
-export class MonoClient {
+export class MonoClient<
+  C extends RestClientConfig | SoapClientConfig,
+  R = C extends SoapClientConfig ? SoapRequest : RestRequest
+> {
   private client: SoapClient | RestClient;
-  constructor(private readonly config: ClientConfig) {
+  constructor(private config: C) {
     this.client = config.type === 'rest' ? new RestClient(config) : new SoapClient(config);
   }
   private matchStatusCode(currentStatus: number, matchs: StatusCode[]): boolean {
@@ -30,7 +41,7 @@ export class MonoClient {
     }
     return false;
   }
-  private shouldRetry(request: Request, response: Response): boolean {
+  private shouldRetry(request: MonoClientRequest, response: MonoClientResponse): boolean {
     if (this.config.retry != null) {
       if (this.config.retry.callbackRetry != null) {
         return this.config.retry.callbackRetry(request, response);
@@ -46,9 +57,10 @@ export class MonoClient {
       }
       return true;
     }
+    /* istanbul ignore next */
     return false;
   }
-  private isSuccessful(response: Response): boolean {
+  private isSuccessful(response: MonoClientResponse): boolean {
     if (this.config.isSuccessfulCallback != null && this.config.isSuccessfulCallback(response)) {
       return true;
     }
@@ -64,18 +76,20 @@ export class MonoClient {
     attempt
   }: RequestAttempt): Promise<TemplateResponse<T>> {
     const startDate = new Date();
-    const response = await this.client.request(request);
+    const response = await this.client.request(request as any);
+    const isSuccessful = this.isSuccessful(response);
     if (this.config.callback != null) {
       this.config.callback(request, response, {
         requestId: this.config.extra?.requestId,
         serviceId: this.config.extra?.serviceId,
+        businessUnit: this.config.extra?.businessUnit,
         requestDate: startDate,
         requestTime: Date.now() - startDate.getTime(),
         attempt: attempt + 1,
-        isSuccessful: this.isSuccessful(response)
+        isSuccessful
       });
     }
-    if (this.isSuccessful(response)) {
+    if (isSuccessful) {
       return response;
     }
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
@@ -84,12 +98,12 @@ export class MonoClient {
     throw new RequestFail(request, response);
   }
 
-  async request<T>(params: Request): Promise<TemplateResponse<T>> {
+  async request<T>(params: R): Promise<TemplateResponse<T>> {
     const maxRetry = this.config.retry?.maxRetry ?? 0;
     if (maxRetry < 0) {
       throw new InvalidMaxRetry(maxRetry);
     }
     const maxAttempt = maxRetry + 1;
-    return this.requestAttempt({ request: params, maxAttempt, attempt: 0 });
+    return this.requestAttempt({ request: params as any, maxAttempt, attempt: 0 });
   }
 }
