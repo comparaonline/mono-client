@@ -20,7 +20,8 @@ export class RestClient extends Client {
         params: params.queryParams,
         data: params.body,
         headers: params.headers,
-        httpsAgent: this.config.ssl ? await this.getHttpsAgent() : undefined
+        httpsAgent: this.config.ssl ? await this.getHttpsAgent() : undefined,
+        timeout: params.requestTimeout ?? this.DEFAULT_REQUEST_TIMEOUT
       });
       return {
         body: response.data,

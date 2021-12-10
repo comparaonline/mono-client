@@ -6,6 +6,7 @@ import { join } from 'path';
 
 export abstract class Client {
   constructor(public config: ClientConfig) {}
+  protected DEFAULT_REQUEST_TIMEOUT = 120000;
   protected generateUrl(basePath: string, path: string, pathParams: Params = {}): string {
     let baseUrl = `${basePath.replace(/[\/]$/, '')}/${path.replace(/^[\/]/, '')}`;
     const pendingParams = baseUrl.match(/{.*}/g) ?? [];

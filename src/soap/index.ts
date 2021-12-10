@@ -43,22 +43,22 @@ export class SoapClient extends BaseClient {
   constructor(public config: SoapClientConfig) {
     super(config);
   }
-  private async getRequestAgentConfig(): Promise<any> {
-    return this.config.ssl
-      ? {
-          request: axios.create({
-            httpsAgent: await this.getHttpsAgent()
-          })
-        }
-      : {};
+  private async getRequestAgentConfig(params: SoapRequest): Promise<any> {
+    const httpsAgent = this.config.ssl ? await this.getHttpsAgent() : undefined;
+    return {
+      requuest: axios.create({
+        httpsAgent,
+        timeout: params.requestTimeout ?? this.DEFAULT_REQUEST_TIMEOUT
+      })
+    };
   }
   private async getClient(params: SoapRequest): Promise<Client> {
     const options = {
       wsdl_headers: params.headers,
-      ...(await this.getRequestAgentConfig())
+      ...(await this.getRequestAgentConfig(params))
     };
     if (params.overwriteWsdl != null) {
-      return await createClientAsync(params.overwriteWsdl, options);
+      return await createClientAsync(params.overwriteWsdl, {});
     }
     if (this.config.wsdl != null) {
       if (this.soapClient == null) {
