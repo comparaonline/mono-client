@@ -68,7 +68,7 @@ export class SoapClient extends BaseClient {
   private async getRequestAgentConfig(params: SoapRequest): Promise<any> {
     const httpsAgent = this.config.ssl ? await this.getHttpsAgent() : undefined;
     return {
-      requuest: axios.create({
+      request: axios.create({
         httpsAgent,
         timeout: params.requestTimeout ?? this.DEFAULT_REQUEST_TIMEOUT
       })
