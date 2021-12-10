@@ -141,7 +141,7 @@ describe('Mono client', () => {
           type: 'rest',
           retry: {
             maxRetry: 10,
-            callbackRetry(request, response): boolean {
+            shouldRetryCallback(request, response): boolean {
               return response.body.counter < 3;
             }
           },
@@ -153,6 +153,46 @@ describe('Mono client', () => {
         });
         await expect(req).rejects.toThrowError(RequestFail);
         expect(callback).toHaveBeenCalledTimes(3);
+        jest.restoreAllMocks();
+      });
+      let secondRetryCallbackCounter = 0;
+      it('should retry by request retry callback', async () => {
+        const callback = jest.fn();
+        jest.spyOn(RestClient.prototype, 'request').mockImplementation(() => {
+          secondRetryCallbackCounter++;
+          return new Promise((resolve) => {
+            resolve({
+              body: {
+                counter: secondRetryCallbackCounter
+              },
+              headers: {},
+              statusCode: 500,
+              raw: {
+                request: '',
+                response: ''
+              }
+            });
+          });
+        });
+        const client = new MonoClient({
+          type: 'rest',
+          retry: {
+            maxRetry: 10,
+            shouldRetryCallback(request, response): boolean {
+              return response.body.counter < 3;
+            }
+          },
+          baseUrl: 'https://gorest.co.in',
+          callback
+        });
+        const req = client.request({
+          path: '/api/mocked-with-jest',
+          shouldRetryCallback(request, response): boolean {
+            return response.body.counter < 4;
+          }
+        });
+        await expect(req).rejects.toThrowError(RequestFail);
+        expect(callback).toHaveBeenCalledTimes(4);
         jest.restoreAllMocks();
       });
       it("shouldn't retry by successful callback", async () => {
@@ -183,6 +223,42 @@ describe('Mono client', () => {
         });
         const response = await client.request({
           path: '/api/mocked-with-jest'
+        });
+        expect(response.body).toBe('Happy');
+        expect(callback).toHaveBeenCalledTimes(1);
+        jest.restoreAllMocks();
+      });
+      it("shouldn't retry by request successful callback", async () => {
+        const callback = jest.fn();
+        jest.spyOn(RestClient.prototype, 'request').mockImplementation(() => {
+          return new Promise((resolve) => {
+            resolve({
+              body: 'Happy',
+              headers: {},
+              statusCode: 500,
+              raw: {
+                request: '',
+                response: ''
+              }
+            });
+          });
+        });
+        const client = new MonoClient({
+          type: 'rest',
+          retry: {
+            maxRetry: 10
+          },
+          isSuccessfulCallback(): boolean {
+            return false;
+          },
+          baseUrl: 'https://gorest.co.in',
+          callback
+        });
+        const response = await client.request({
+          path: '/api/mocked-with-jest',
+          isSuccessfulCallback(): boolean {
+            return true;
+          }
         });
         expect(response.body).toBe('Happy');
         expect(callback).toHaveBeenCalledTimes(1);

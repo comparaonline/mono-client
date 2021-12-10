@@ -135,7 +135,8 @@ describe('Soap client', () => {
               IntA: 1,
               IntB: 0
             },
-            method: 'Divide'
+            method: 'Divide',
+            requestTimeout: 2000
           });
           await expect(req).rejects.toThrowError(RequestFail);
         });

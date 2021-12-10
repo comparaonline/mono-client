@@ -75,7 +75,8 @@ describe('Rest client', () => {
           });
           const data = await client.request<any>({
             path: '/public/v1/users',
-            method: 'GET'
+            method: 'GET',
+            requestTimeout: 2000
           });
           expect(data.statusCode).toBe(200);
         });
