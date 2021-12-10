@@ -6,6 +6,7 @@ import {
   MissingMandatoryParamenter,
   MissingSoapMethod
 } from '../exceptions';
+import axios from 'axios';
 
 interface SoapError {
   root: object;
@@ -42,15 +43,26 @@ export class SoapClient extends BaseClient {
   constructor(public config: SoapClientConfig) {
     super(config);
   }
+  private async getRequestAgentConfig(): Promise<any> {
+    return this.config.ssl
+      ? {
+          request: axios.create({
+            httpsAgent: await this.getHttpsAgent()
+          })
+        }
+      : {};
+  }
   private async getClient(params: SoapRequest): Promise<Client> {
+    const options = {
+      wsdl_headers: params.headers,
+      ...(await this.getRequestAgentConfig())
+    };
     if (params.overwriteWsdl != null) {
-      return await createClientAsync(params.overwriteWsdl, {
-        wsdl_headers: params.headers
-      });
+      return await createClientAsync(params.overwriteWsdl, options);
     }
     if (this.config.wsdl != null) {
       if (this.soapClient == null) {
-        this.soapClient = await createClientAsync(this.config.wsdl);
+        this.soapClient = await createClientAsync(this.config.wsdl, options);
       }
       return this.soapClient;
     }
@@ -90,9 +102,6 @@ export class SoapClient extends BaseClient {
     }
     if (client[params.method] == null) {
       throw new MissingSoapMethod(params.method);
-    }
-    if (this.config.ssl != null) {
-      client.setSecurity(this.config.ssl);
     }
     const results = await this.soapRequest(client, params.method, params.body);
     return {

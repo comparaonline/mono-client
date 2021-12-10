@@ -19,7 +19,8 @@ export class RestClient extends Client {
         method: params.method,
         params: params.queryParams,
         data: params.body,
-        headers: params.headers
+        headers: params.headers,
+        httpsAgent: this.config.ssl ? await this.getHttpsAgent() : undefined
       });
       return {
         body: response.data,

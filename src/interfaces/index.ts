@@ -1,5 +1,4 @@
 import { Method } from 'axios';
-import { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
 
 export type Params = { [key: string]: string | number };
 
@@ -111,20 +110,43 @@ export type Callback = (
 interface MCBaseClientConfig {
   retry?: Retry;
   isSuccessfulCallback?: (response: MonoClientResponse) => boolean;
+  ssl?: SSL;
 }
+
+export interface SslSecurity {
+  type: 'ssl-security';
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  key: string | Buffer;
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  cert: string | Buffer;
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  ca?: Buffer | string;
+  rejectUnauthorized?: boolean;
+}
+
+export interface SslPfxSecurity {
+  type: 'ssl-pfx-security';
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  pfx: string | Buffer;
+  passphrase?: string;
+  rejectUnauthorized?: boolean;
+}
+
+export interface SSLReject {
+  type: 'ssl-reject';
+  rejectUnauthorized: boolean;
+}
+
+type SSL = SslSecurity | SslPfxSecurity | SSLReject;
 
 export interface SoapBaseClientConfig extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
-  ssl?: ClientSSLSecurity | ClientSSLSecurityPFX;
 }
 
 export interface RestBaseClientConfig extends MCBaseClientConfig {
   type: 'rest';
   baseUrl?: string;
-  ssl?: {
-    rejectUnauthorized: boolean;
-  };
 }
 
 interface ExtendedConfig {
