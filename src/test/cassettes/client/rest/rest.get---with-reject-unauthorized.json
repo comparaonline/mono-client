@@ -1,0 +1,204 @@
+[
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 2932,
+          "pages": 147,
+          "page": 1,
+          "limit": 20,
+          "links": {
+            "previous": null,
+            "current": "https://gorest.co.in/public/v1/users?page=1",
+            "next": "https://gorest.co.in/public/v1/users?page=2"
+          }
+        }
+      },
+      "data": [
+        {
+          "id": 3506,
+          "name": "Neha Dhandharia",
+          "email": "abc.ramakrishna1639150990107@example.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 3525,
+          "name": "Neha Dhandharia",
+          "email": "abc.ramakrishna1639151872063@example.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 3527,
+          "name": "Neha Dhandharia",
+          "email": "abc.ramakrishna1639151945828@example.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 3529,
+          "name": "Neha Dhandharia",
+          "email": "abc.ramakrishna1639151990473@example.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 3530,
+          "name": "Neha Dhandharia",
+          "email": "abc.ramakrishna1639152046170@example.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 31,
+          "name": "Heema Gill IV",
+          "email": "gill_iv_heema@parisian-hoppe.biz",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 32,
+          "name": "Tanushri Deshpande MD",
+          "email": "md_deshpande_tanushri@lind.com",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 33,
+          "name": "Bharat Dhawan",
+          "email": "dhawan_bharat@huels-kunde.net",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 34,
+          "name": "Msgr. Sweta Khatri",
+          "email": "msgr_sweta_khatri@ferry.biz",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 35,
+          "name": "Aatmaja Desai",
+          "email": "desai_aatmaja@gutmann.biz",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 36,
+          "name": "Baijayanti Joshi",
+          "email": "joshi_baijayanti@crist.net",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 37,
+          "name": "Bhoopati Talwar",
+          "email": "bhoopati_talwar@goyette.org",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 39,
+          "name": "Gauranga Pillai",
+          "email": "gauranga_pillai@schuster.io",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 40,
+          "name": "Shashi Marar",
+          "email": "marar_shashi@jaskolski.org",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 41,
+          "name": "Rupinder Mehra Sr.",
+          "email": "sr_rupinder_mehra@quitzon.com",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 42,
+          "name": "Opaline Arora II",
+          "email": "opaline_ii_arora@nolan.name",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 43,
+          "name": "Chaturbhuj Dubashi DC",
+          "email": "chaturbhuj_dubashi_dc@williamson.org",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 44,
+          "name": "Girika Pandey",
+          "email": "pandey_girika@ondricka.net",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 45,
+          "name": "Chandi Tandon",
+          "email": "chandi_tandon@medhurst.com",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 46,
+          "name": "Sarada Ahuja III",
+          "email": "ahuja_sarada_iii@treutel-buckridge.io",
+          "gender": "male",
+          "status": "inactive"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Fri, 10 Dec 2021 16:18:22 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Vary",
+      "Accept-Encoding",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "X-Download-Options",
+      "noopen",
+      "X-Permitted-Cross-Domain-Policies",
+      "none",
+      "Referrer-Policy",
+      "strict-origin-when-cross-origin",
+      "ETag",
+      "W/\"1050652fd3734003f1091f5da8e4077f\"",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "X-Request-Id",
+      "17b0b3aa-67ed-4290-9d26-2faca707169d",
+      "X-Runtime",
+      "0.006926",
+      "Strict-Transport-Security",
+      "max-age=63072000; includeSubDomains",
+      "Vary",
+      "Origin"
+    ]
+  }
+]

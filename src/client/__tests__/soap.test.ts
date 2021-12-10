@@ -1,5 +1,4 @@
 import { MonoClient } from '..';
-import { ClientSSLSecurity } from '../..';
 import {
   ClientBadConfiguration,
   MissingMandatoryParamenter,
@@ -81,12 +80,55 @@ describe('Soap client', () => {
           });
           await expect(req).rejects.toThrowError(ClientBadConfiguration);
         });
-        it('Should throw a soap exception', async () => {
-          const ssl = new ClientSSLSecurity('', '');
+        it('Should throw a soap exception - using SSL security', async () => {
           const sslClient = new MonoClient({
             type: 'soap',
             wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL',
-            ssl
+            ssl: {
+              type: 'ssl-security',
+              key: Buffer.from(''),
+              cert: Buffer.from('')
+            }
+          });
+          const req = sslClient.request({
+            body: {
+              IntA: 1,
+              IntB: 0
+            },
+            method: 'Divide'
+          });
+          await expect(req).rejects.toThrowError(RequestFail);
+        });
+
+        it('Should throw a soap exception - Using SSL PFX Security', async () => {
+          const sslClient = new MonoClient({
+            type: 'soap',
+            wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL',
+            ssl: {
+              type: 'ssl-pfx-security',
+              pfx: Buffer.from(''),
+              passphrase: ''
+            }
+          });
+          const req = sslClient.request({
+            body: {
+              IntA: 1,
+              IntB: 0
+            },
+            method: 'Divide'
+          });
+          await expect(req).rejects.toThrowError(RequestFail);
+        });
+        it('Should throw a soap exception - Using SSL Security with CA', async () => {
+          const sslClient = new MonoClient({
+            type: 'soap',
+            wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL',
+            ssl: {
+              type: 'ssl-security',
+              key: Buffer.from(''),
+              cert: Buffer.from(''),
+              ca: 'src/test/factories/soap/ca.pem'
+            }
           });
           const req = sslClient.request({
             body: {
