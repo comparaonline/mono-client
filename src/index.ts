@@ -20,3 +20,4 @@ export {
   StatusCode,
   Retry
 } from './interfaces';
+export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';

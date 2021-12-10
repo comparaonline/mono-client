@@ -30,6 +30,28 @@ interface SoapError {
   body: string;
 }
 
+interface SoapError {
+  root: object;
+  response: {
+    status: number;
+    statusText: null | string;
+    headers: Headers;
+    config: {
+      url: string;
+      method: string;
+      data: string;
+      headers: Headers;
+      timeout: number;
+    };
+    request: {
+      path: string;
+      headers: Headers;
+    };
+    data: string;
+  };
+  body: string;
+}
+
 interface SoapResponse {
   result: object;
   rawResponse: string;
