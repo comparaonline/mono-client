@@ -1,5 +1,4 @@
 import { Method } from 'axios';
-import { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
 
 export type Params = { [key: string]: string | number };
 
@@ -52,21 +51,27 @@ export interface Headers {
   [key: string]: string;
 }
 
-export interface SoapRequest {
+interface BaseRequest {
+  headers?: Headers;
+  /** Request timeout in ms, default to 120000 **/
+  requestTimeout?: number;
+  isSuccessfulCallback?: IsSuccessfulCallback;
+  shouldRetryCallback?: shouldRetryCallback;
+}
+
+export interface SoapRequest extends BaseRequest {
   body: object;
   overwriteWsdl?: string;
-  headers?: Headers;
   method: string;
 }
 
-export interface RestRequest {
+export interface RestRequest extends BaseRequest {
   path: string;
   overwriteBaseUrl?: string;
   method?: Method;
   pathParams?: Params;
   queryParams?: Params;
   body?: any;
-  headers?: Headers;
 }
 
 export type MonoClientRequest = SoapRequest | RestRequest;
@@ -95,11 +100,14 @@ export interface Info extends Extra {
   isSuccessful: boolean;
 }
 
+type shouldRetryCallback = (request: MonoClientRequest, response: MonoClientResponse) => boolean;
+type IsSuccessfulCallback = (response: MonoClientResponse) => boolean;
+
 export interface Retry {
   maxRetry: number;
   on?: StatusCode[];
   notOn?: StatusCode[];
-  callbackRetry?: (request: MonoClientRequest, response: MonoClientResponse) => boolean;
+  shouldRetryCallback?: shouldRetryCallback;
 }
 
 export type Callback = (
@@ -110,21 +118,44 @@ export type Callback = (
 
 interface MCBaseClientConfig {
   retry?: Retry;
-  isSuccessfulCallback?: (response: MonoClientResponse) => boolean;
+  isSuccessfulCallback?: IsSuccessfulCallback;
+  ssl?: SSL;
 }
+
+export interface SslSecurity {
+  type: 'ssl-security';
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  key: string | Buffer;
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  cert: string | Buffer;
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  ca?: Buffer | string;
+  rejectUnauthorized?: boolean;
+}
+
+export interface SslPfxSecurity {
+  type: 'ssl-pfx-security';
+  /** Buffer or path, path will use process.cwd to get absolute path */
+  pfx: string | Buffer;
+  passphrase?: string;
+  rejectUnauthorized?: boolean;
+}
+
+export interface SSLReject {
+  type: 'ssl-reject';
+  rejectUnauthorized: boolean;
+}
+
+type SSL = SslSecurity | SslPfxSecurity | SSLReject;
 
 export interface SoapBaseClientConfig extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
-  ssl?: ClientSSLSecurity | ClientSSLSecurityPFX;
 }
 
 export interface RestBaseClientConfig extends MCBaseClientConfig {
   type: 'rest';
   baseUrl?: string;
-  ssl?: {
-    rejectUnauthorized: boolean;
-  };
 }
 
 interface ExtendedConfig {

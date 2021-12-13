@@ -61,6 +61,28 @@ describe('Rest client', () => {
       },
       CASSETTES_PATH
     );
+    describeRecording(
+      'GET - With reject unauthorized',
+      () => {
+        it('Should get a list of users', async () => {
+          const client = new MonoClient({
+            type: 'rest',
+            baseUrl: 'https://gorest.co.in',
+            ssl: {
+              type: 'ssl-reject',
+              rejectUnauthorized: false
+            }
+          });
+          const data = await client.request<any>({
+            path: '/public/v1/users',
+            method: 'GET',
+            requestTimeout: 2000
+          });
+          expect(data.statusCode).toBe(200);
+        });
+      },
+      CASSETTES_PATH
+    );
     describe('POST', () => {
       it('Should create an user', async () => {
         jest.spyOn(axios, 'request').mockImplementation(() => {

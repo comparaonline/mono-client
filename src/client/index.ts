@@ -43,8 +43,11 @@ export class MonoClient<
   }
   private shouldRetry(request: MonoClientRequest, response: MonoClientResponse): boolean {
     if (this.config.retry != null) {
-      if (this.config.retry.callbackRetry != null) {
-        return this.config.retry.callbackRetry(request, response);
+      if (request.shouldRetryCallback != null) {
+        return request.shouldRetryCallback(request, response);
+      }
+      if (this.config.retry.shouldRetryCallback != null) {
+        return this.config.retry.shouldRetryCallback(request, response);
       }
       if (
         this.config.retry.notOn != null &&
@@ -60,9 +63,12 @@ export class MonoClient<
     /* istanbul ignore next */
     return false;
   }
-  private isSuccessful(response: MonoClientResponse): boolean {
-    if (this.config.isSuccessfulCallback != null && this.config.isSuccessfulCallback(response)) {
-      return true;
+  private isSuccessful(request: MonoClientRequest, response: MonoClientResponse): boolean {
+    if (request.isSuccessfulCallback != null) {
+      return request.isSuccessfulCallback(response);
+    }
+    if (this.config.isSuccessfulCallback != null) {
+      return this.config.isSuccessfulCallback(response);
     }
     if (response.statusCode === 200 || response.statusCode === 201) {
       return true;
@@ -77,7 +83,7 @@ export class MonoClient<
   }: RequestAttempt): Promise<TemplateResponse<T>> {
     const startDate = new Date();
     const response = await this.client.request(request as any);
-    const isSuccessful = this.isSuccessful(response);
+    const isSuccessful = this.isSuccessful(request, response);
     if (this.config.callback != null) {
       this.config.callback(request, response, {
         requestId: this.config.extra?.requestId,
