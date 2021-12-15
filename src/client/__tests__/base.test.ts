@@ -2,7 +2,7 @@ import { MonoClient } from '..';
 import { InvalidMaxRetry, RequestFail } from '../../exceptions';
 import { StatusCode } from '../../interfaces';
 import { RestClient } from '../../rest';
-import { describeRecording } from '../../test/helpers';
+import { describeRecording } from '@comparaonline/test-helpers';
 
 const CASSETTES_PATH = 'client/base';
 
