@@ -318,12 +318,14 @@
     reflect-metadata "^0.1.10"
     rxjs "^6.3.3"
 
-"@comparaonline/test-helpers@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@comparaonline/test-helpers/-/test-helpers-1.0.1.tgz#2763eac5116cd76ab0f1e6ca0318de615d77af18"
-  integrity sha512-WSxOwC7eMDyzxi3M71fJPpm2iF2DMVtThsrKoUP3/hVLtumH9XZlWXHKqE8ntsV6Aes5EcZyYXG2krGkyxoIwQ==
+"@comparaonline/test-helpers@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@comparaonline/test-helpers/-/test-helpers-1.1.0.tgz#556cae39ed78b8774c795629686b491b4f5e7144"
+  integrity sha512-3DkotSySP42v6AABNFpKeOVGrHoUbqt+TptTzDMxi4xLTz1gb4i443jXmbOGk/u1Ii5TB6bUj3UAP4hBUW6tQA==
   dependencies:
     "@comparaonline/event-streamer" "^7.0.1"
+    jest "^27.3.1"
+    nock-utils "^0.2.1"
 
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
