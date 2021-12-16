@@ -38,6 +38,7 @@
     "soap": "^0.43.0"
   },
   "devDependencies": {
+    "@comparaonline/test-helpers": "^1.1.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.10",
     "@types/sax": "^1.2.3",
