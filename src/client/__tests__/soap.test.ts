@@ -5,7 +5,7 @@ import {
   MissingSoapMethod,
   RequestFail
 } from '../../exceptions';
-import { describeRecording } from '../../test/helpers';
+import { describeRecording } from '@comparaonline/test-helpers';
 import { join } from 'path';
 
 const CASSETTES_PATH = 'client/soap';

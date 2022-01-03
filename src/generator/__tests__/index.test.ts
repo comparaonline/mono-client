@@ -1,5 +1,5 @@
 import { MonoClientGenerator } from '..';
-import { describeRecording } from '../../test/helpers';
+import { describeRecording } from '@comparaonline/test-helpers';
 
 const CASSETTES_PATH = 'generator';
 const businessUnit = 'CI';
