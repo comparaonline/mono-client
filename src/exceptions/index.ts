@@ -14,7 +14,11 @@ export class MissingPathParameter extends Error {
 
 export class RequestFail extends Error {
   constructor(public request: MonoClientRequest, public response: MonoClientResponse) {
-    super(`Request Fail - ${response.statusCode} - ${response.body}`);
+    super(
+      `Request Fail - ${response.statusCode} - ${
+        JSON.stringify(response.body) || response.message || 'unknown error'
+      }`
+    );
   }
 }
 
