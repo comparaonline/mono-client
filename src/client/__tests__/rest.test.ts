@@ -201,6 +201,7 @@ describe('Rest client', () => {
           }
         });
         await expect(reqWithBody).rejects.toThrowError(RequestFail);
+        await expect(reqWithBody).rejects.toThrowError('Request Fail - 500 - unknown error');
         jest.restoreAllMocks();
       });
     });

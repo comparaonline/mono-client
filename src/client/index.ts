@@ -101,7 +101,7 @@ export class MonoClient<
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
       return this.requestAttempt({ request, maxAttempt, attempt: attempt + 1 });
     }
-    throw new RequestFail(request, response);
+    throw new RequestFail(this.config.type, request, response);
   }
 
   async request<T>(params: R): Promise<TemplateResponse<T>> {
