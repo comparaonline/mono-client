@@ -13,7 +13,11 @@ export class MissingPathParameter extends Error {
 }
 
 export class RequestFail extends Error {
-  constructor(public request: MonoClientRequest, public response: MonoClientResponse) {
+  constructor(
+    public type: 'soap' | 'rest',
+    public request: MonoClientRequest,
+    public response: MonoClientResponse
+  ) {
     super(
       `Request Fail - ${response.statusCode} - ${
         JSON.stringify(response.body) || response.message || 'unknown error'
