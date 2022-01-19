@@ -1,4 +1,4 @@
-import { ClientConfig, MonoClientRequest, MonoClientResponse, Params } from '../interfaces';
+import { ClientConfig, MonoClientRequest, MonoClientResponse, PathParams } from '../interfaces';
 import { ClientBadConfiguration, MissingPathParameter } from '../exceptions';
 import { Agent } from 'https';
 import { readFile } from 'fs/promises';
@@ -7,7 +7,7 @@ import { join } from 'path';
 export abstract class Client {
   constructor(public config: ClientConfig) {}
   protected DEFAULT_REQUEST_TIMEOUT = 120000;
-  protected generateUrl(basePath: string, path: string, pathParams: Params = {}): string {
+  protected generateUrl(basePath: string, path: string, pathParams: PathParams = {}): string {
     let baseUrl = `${basePath.replace(/[\/]$/, '')}/${path.replace(/^[\/]/, '')}`;
     const pendingParams = baseUrl.match(/{.*}/g) ?? [];
     for (const curlyParam of pendingParams) {

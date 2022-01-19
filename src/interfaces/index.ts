@@ -1,6 +1,7 @@
 import { Method } from 'axios';
 
-export type Params = { [key: string]: string | number };
+export type PathParams = { [key: string]: string | number };
+export type QueryParams = { [key: string]: string | number | string[] | number[] };
 
 export enum StatusCode {
   S4XX = '4XX',
@@ -69,8 +70,8 @@ export interface RestRequest extends BaseRequest {
   path: string;
   overwriteBaseUrl?: string;
   method?: Method;
-  pathParams?: Params;
-  queryParams?: Params;
+  pathParams?: PathParams;
+  queryParams?: QueryParams;
   body?: any;
 }
 
