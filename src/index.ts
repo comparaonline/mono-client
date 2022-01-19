@@ -16,7 +16,8 @@ export {
   RestClientConfig,
   SoapClientConfig,
   Callback,
-  Params,
+  QueryParams,
+  PathParams,
   StatusCode,
   Retry
 } from './interfaces';
