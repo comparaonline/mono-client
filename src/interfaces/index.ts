@@ -100,8 +100,11 @@ export interface Info extends Extra {
   isSuccessful: boolean;
 }
 
+export type IsSuccessfulCallbackReturn<T extends Error> = boolean | T | string;
 type shouldRetryCallback = (request: MonoClientRequest, response: MonoClientResponse) => boolean;
-type IsSuccessfulCallback = (response: MonoClientResponse) => boolean;
+type IsSuccessfulCallback = <T extends Error>(
+  response: MonoClientResponse
+) => IsSuccessfulCallbackReturn<T>;
 
 export interface Retry {
   maxRetry: number;

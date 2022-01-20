@@ -16,13 +16,10 @@ export class RequestFail extends Error {
   constructor(
     public type: 'soap' | 'rest',
     public request: MonoClientRequest,
-    public response: MonoClientResponse
+    public response: MonoClientResponse,
+    public error: Error
   ) {
-    super(
-      `Request Fail - ${response.statusCode} - ${
-        JSON.stringify(response.body) || response.message || 'unknown error'
-      }`
-    );
+    super(`Request Fail - ${response.statusCode} - ${error.message}`);
   }
 }
 
