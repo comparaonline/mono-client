@@ -113,7 +113,7 @@ export class MonoClient<
         ? isSuccessfulResponse
         : typeof isSuccessfulResponse === 'string'
         ? new Error(isSuccessfulResponse)
-        : new Error(JSON.stringify(response.body) || 'unknown error');
+        : new Error(response.body != null ? JSON.stringify(response.body) : 'unknown error');
 
     throw new RequestFail(this.config.type, request, response, error);
   }
