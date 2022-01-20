@@ -2,6 +2,7 @@ import axios from 'axios';
 import { MonoClient } from '..';
 import { ClientBadConfiguration, MissingPathParameter, RequestFail } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
+import { IsSuccessfulCallbackReturn } from '../../interfaces';
 
 const CASSETTES_PATH = 'client/rest';
 const RESPONSE_DATA = 'I am text';
@@ -122,6 +123,9 @@ describe('Rest client', () => {
           method: 'POST',
           body: {
             data: 'empty'
+          },
+          isSuccessfulCallback() {
+            return new Error('Error');
           }
         });
         await expect(req).rejects.toThrowError(RequestFail);
@@ -148,7 +152,10 @@ describe('Rest client', () => {
         });
         it('Should throw a request fail exception (404)', async () => {
           const req = client.request({
-            path: '/missing-url'
+            path: '/missing-url',
+            isSuccessfulCallback() {
+              return 'Error';
+            }
           });
           await expect(req).rejects.toThrowError(RequestFail);
         });

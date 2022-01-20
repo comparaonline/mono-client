@@ -56,7 +56,7 @@ interface BaseRequest {
   headers?: Headers;
   /** Request timeout in ms, default to 120000 **/
   requestTimeout?: number;
-  isSuccessfulCallback?: IsSuccessfulCallback;
+  isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   shouldRetryCallback?: shouldRetryCallback;
 }
 
@@ -103,7 +103,7 @@ export interface Info extends Extra {
 
 export type IsSuccessfulCallbackReturn<T extends Error> = boolean | T | string;
 type shouldRetryCallback = (request: MonoClientRequest, response: MonoClientResponse) => boolean;
-type IsSuccessfulCallback = <T extends Error>(
+type IsSuccessfulCallback<T extends Error> = (
   response: MonoClientResponse
 ) => IsSuccessfulCallbackReturn<T>;
 
@@ -122,7 +122,7 @@ export type Callback = (
 
 interface MCBaseClientConfig {
   retry?: Retry;
-  isSuccessfulCallback?: IsSuccessfulCallback;
+  isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   ssl?: SSL;
 }
 
