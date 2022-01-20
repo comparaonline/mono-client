@@ -7,7 +7,8 @@ import {
   RestRequest,
   SoapRequest,
   MonoClientResponse,
-  StatusCode
+  StatusCode,
+  IsSuccessfulCallbackReturn
 } from '../interfaces';
 import { InvalidMaxRetry, RequestFail } from '../exceptions';
 
@@ -63,7 +64,10 @@ export class MonoClient<
     /* istanbul ignore next */
     return false;
   }
-  private isSuccessful(request: MonoClientRequest, response: MonoClientResponse): boolean {
+  private isSuccessful(
+    request: MonoClientRequest,
+    response: MonoClientResponse
+  ): IsSuccessfulCallbackReturn<Error> {
     if (request.isSuccessfulCallback != null) {
       return request.isSuccessfulCallback(response);
     }
@@ -83,7 +87,8 @@ export class MonoClient<
   }: RequestAttempt): Promise<TemplateResponse<T>> {
     const startDate = new Date();
     const response = await this.client.request(request as any);
-    const isSuccessful = this.isSuccessful(request, response);
+    const isSuccessfulResponse = this.isSuccessful(request, response);
+    const isSuccessful = isSuccessfulResponse === true;
     if (this.config.callback != null) {
       this.config.callback(request, response, {
         requestId: this.config.extra?.requestId,
@@ -98,10 +103,19 @@ export class MonoClient<
     if (isSuccessful) {
       return response;
     }
+
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
       return this.requestAttempt({ request, maxAttempt, attempt: attempt + 1 });
     }
-    throw new RequestFail(this.config.type, request, response);
+
+    const error =
+      isSuccessfulResponse instanceof Error
+        ? isSuccessfulResponse
+        : typeof isSuccessfulResponse === 'string'
+        ? new Error(isSuccessfulResponse)
+        : new Error(response.body != null ? JSON.stringify(response.body) : 'unknown error');
+
+    throw new RequestFail(this.config.type, request, response, error);
   }
 
   async request<T>(params: R): Promise<TemplateResponse<T>> {
