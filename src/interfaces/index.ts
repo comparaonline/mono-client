@@ -1,4 +1,4 @@
-import { Method } from 'axios';
+import { Method, ResponseType } from 'axios';
 
 export type PathParams = { [key: string]: string | number };
 export type QueryParams = { [key: string]: string | number | string[] | number[] };
@@ -73,6 +73,7 @@ export interface RestRequest extends BaseRequest {
   pathParams?: PathParams;
   queryParams?: QueryParams;
   body?: any;
+  responseType?: ResponseType;
 }
 
 export type MonoClientRequest = SoapRequest | RestRequest;

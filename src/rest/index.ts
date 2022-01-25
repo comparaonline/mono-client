@@ -21,7 +21,8 @@ export class RestClient extends Client {
         data: params.body,
         headers: params.headers,
         httpsAgent: this.config.ssl ? await this.getHttpsAgent() : undefined,
-        timeout: params.requestTimeout ?? this.DEFAULT_REQUEST_TIMEOUT
+        timeout: params.requestTimeout ?? this.DEFAULT_REQUEST_TIMEOUT,
+        responseType: params.responseType
       });
       return {
         body: response.data,
