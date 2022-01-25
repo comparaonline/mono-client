@@ -1,4 +1,4 @@
-import { Method } from 'axios';
+import { Method, ResponseType } from 'axios';
 
 export type PathParams = { [key: string]: string | number };
 export type QueryParams = { [key: string]: string | number | string[] | number[] };
@@ -58,6 +58,7 @@ interface BaseRequest {
   requestTimeout?: number;
   isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   shouldRetryCallback?: shouldRetryCallback;
+  callback?: Callback;
 }
 
 export interface SoapRequest extends BaseRequest {
@@ -73,6 +74,7 @@ export interface RestRequest extends BaseRequest {
   pathParams?: PathParams;
   queryParams?: QueryParams;
   body?: any;
+  responseType?: ResponseType;
 }
 
 export type MonoClientRequest = SoapRequest | RestRequest;

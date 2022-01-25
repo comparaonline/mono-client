@@ -1,6 +1,6 @@
 {
   "name": "@comparaonline/mono-client",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Soap and rest connector",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -12,6 +12,7 @@
     "build": "tsc",
     "lint": "eslint src --fix",
     "test": "jest",
+    "pretest": "yarn lint",
     "tester": "ts-node src/tester.ts"
   },
   "author": {

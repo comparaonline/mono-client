@@ -89,8 +89,9 @@ export class MonoClient<
     const response = await this.client.request(request as any);
     const isSuccessfulResponse = this.isSuccessful(request, response);
     const isSuccessful = isSuccessfulResponse === true;
-    if (this.config.callback != null) {
-      this.config.callback(request, response, {
+    const callback = request.callback ?? this.config.callback;
+    if (callback != null) {
+      callback(request, response, {
         requestId: this.config.extra?.requestId,
         serviceId: this.config.extra?.serviceId,
         businessUnit: this.config.extra?.businessUnit,
