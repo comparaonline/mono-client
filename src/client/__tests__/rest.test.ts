@@ -35,14 +35,17 @@ describe('Rest client', () => {
           expect(data.body.meta.pagination.page).toBe(PAGE);
         });
         it('Should complete path params', async () => {
+          const callback = jest.fn();
           const data = await client.request<any>({
             path: '/public/v1/users/{userId}/posts',
             method: 'GET',
             pathParams: {
               userId: 1
-            }
+            },
+            callback
           });
           expect(data.statusCode).toBe(200);
+          expect(callback).toHaveBeenCalled();
         });
         it('Should use a different API', async () => {
           const LOCATION_ID = 3;

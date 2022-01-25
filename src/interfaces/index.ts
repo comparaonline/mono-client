@@ -58,6 +58,7 @@ interface BaseRequest {
   requestTimeout?: number;
   isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   shouldRetryCallback?: shouldRetryCallback;
+  callback?: Callback;
 }
 
 export interface SoapRequest extends BaseRequest {
