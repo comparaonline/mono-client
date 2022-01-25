@@ -2,7 +2,6 @@ import axios from 'axios';
 import { MonoClient } from '..';
 import { ClientBadConfiguration, MissingPathParameter, RequestFail } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
-import { IsSuccessfulCallbackReturn } from '../../interfaces';
 
 const CASSETTES_PATH = 'client/rest';
 const RESPONSE_DATA = 'I am text';

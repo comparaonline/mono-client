@@ -12,6 +12,7 @@
     "build": "tsc",
     "lint": "eslint src --fix",
     "test": "jest",
+    "pretest": "yarn lint",
     "tester": "ts-node src/tester.ts"
   },
   "author": {
