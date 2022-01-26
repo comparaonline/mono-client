@@ -6,9 +6,12 @@ import { join } from 'path';
 
 export abstract class Client {
   constructor(public config: ClientConfig) {}
+
   protected DEFAULT_REQUEST_TIMEOUT = 120000;
+
   protected generateUrl(basePath: string, path: string, pathParams: PathParams = {}): string {
-    let baseUrl = `${basePath.replace(/[\/]$/, '')}/${path.replace(/^[\/]/, '')}`;
+    const cleanPath = path ? `/${path.replace(/^[\/]/, '')}` : '';
+    let baseUrl = `${basePath.replace(/[\/]$/, '')}${cleanPath}`;
     const pendingParams = baseUrl.match(/{.*}/g) ?? [];
     for (const curlyParam of pendingParams) {
       const param = curlyParam.replace(/[{}]/g, '');
@@ -19,11 +22,13 @@ export abstract class Client {
     }
     return baseUrl;
   }
+
   protected async readFile(pathOrBuffer: string | Buffer): Promise<Buffer> {
     return typeof pathOrBuffer === 'string'
       ? await readFile(join(process.cwd(), pathOrBuffer))
       : pathOrBuffer;
   }
+
   protected async getHttpsAgent(): Promise<Agent> {
     const ssl = this.config.ssl;
     /* istanbul ignore next */
@@ -53,5 +58,6 @@ export abstract class Client {
       });
     }
   }
+
   abstract request(params: MonoClientRequest): Promise<MonoClientResponse>;
 }
