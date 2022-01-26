@@ -121,7 +121,7 @@ describe('Rest client', () => {
           });
         });
         const req = client.request<any>({
-          path: '/public/v1/users',
+          path: '',
           method: 'POST',
           body: {
             data: 'empty'
