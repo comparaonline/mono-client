@@ -10,7 +10,7 @@ import {
   StatusCode,
   IsSuccessfulCallbackReturn
 } from '../interfaces';
-import { InvalidMaxRetry, RequestFail } from '../exceptions';
+import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
 
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
@@ -80,6 +80,20 @@ export class MonoClient<
     return false;
   }
 
+  private bodyParser(request: MonoClientRequest, response: MonoClientResponse): any {
+    try {
+      if (request.bodyParser != null) {
+        return request.bodyParser(response.body);
+      }
+      if (this.config.bodyParser != null) {
+        return this.config.bodyParser(response.body);
+      }
+    } catch (e: any) {
+      return new BodyParserFail(this.config.type, request, response, e);
+    }
+    return response.body;
+  }
+
   private async requestAttempt<T>({
     request,
     maxAttempt,
@@ -87,7 +101,9 @@ export class MonoClient<
   }: RequestAttempt): Promise<TemplateResponse<T>> {
     const startDate = new Date();
     const response = await this.client.request(request as any);
-    const isSuccessfulResponse = this.isSuccessful(request, response);
+    const bodyParsed = this.bodyParser(request, response);
+    const isSuccessfulResponse =
+      bodyParsed instanceof BodyParserFail ? false : this.isSuccessful(request, response);
     const isSuccessful = isSuccessfulResponse === true;
     const callback = request.callback ?? this.config.callback;
     if (callback != null) {
@@ -101,6 +117,10 @@ export class MonoClient<
         isSuccessful
       });
     }
+    if (bodyParsed instanceof BodyParserFail) {
+      throw bodyParsed;
+    }
+    response.body = bodyParsed;
     if (isSuccessful) {
       return response;
     }

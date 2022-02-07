@@ -23,6 +23,17 @@ export class RequestFail extends Error {
   }
 }
 
+export class BodyParserFail extends Error {
+  constructor(
+    public type: 'soap' | 'rest',
+    public request: MonoClientRequest,
+    public response: MonoClientResponse,
+    public error: Error
+  ) {
+    super(`Body Parser - ${error.message}`);
+  }
+}
+
 export class ClientBadConfiguration extends Error {
   constructor(message: string) {
     super(message);

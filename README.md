@@ -19,6 +19,7 @@
 - Metrics and starts date always available
 - Reuse configuration for business units and services
 - TypeScript Support
+- body parser 
 
 ## Installing
 
@@ -126,6 +127,10 @@ async function testSoap() {
         // This will overwrite retry on and notOn
         return response.body.Error === 'server timeout';
       }
+    },
+    bodyParser<T>(body: any): T {
+      //Is optional, returns any pardes property as response body
+      return JSON.parse(body.clientData);
     }
   });
   const response = await soapClient.request({
@@ -186,6 +191,10 @@ async function restTest() {
         // This will overwrite retry on and notOn
         return response.body.Error === 'server timeout';
       }
+    },
+    bodyParser<T>(body: any): T {
+      //Is optional, returns any pardes property as response body
+      return JSON.parse(body.clientData);
     }
   });
 
@@ -231,6 +240,9 @@ async function generatorTest() {
       console.log(response);
       console.log(info);
     },
+    bodyParser<T>(body: any): T {
+      //Is optional, returns any pardes property as response body
+      return JSON.parse(body.clientData);
   });
 
   const restClient = generator.get({
