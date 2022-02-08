@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BodyParserFail } from '../../exceptions';
 import { MonoClient } from '..';
 
 const CLIENT_DATA = {
@@ -7,6 +8,10 @@ const CLIENT_DATA = {
 
 const RESPONSE_DATA = {
   clientData: JSON.stringify(CLIENT_DATA)
+};
+
+const RESPONSE_NOT_PARSABLE_DATA = {
+  clientData: '["foo", "bar\\"]'
 };
 
 describe('Body parser functionality', () => {
@@ -61,6 +66,33 @@ describe('Body parser functionality', () => {
       });
 
       expect(data.body).toStrictEqual(CLIENT_DATA);
+      jest.restoreAllMocks();
+    });
+  });
+
+  describe('Send body parser to request', () => {
+    it('return error', async () => {
+      jest.spyOn(axios, 'request').mockImplementation(() => {
+        return new Promise((resolve) => {
+          resolve({
+            data: RESPONSE_NOT_PARSABLE_DATA,
+            headers: {},
+            status: 200
+          });
+        });
+      });
+      const client = new MonoClient({
+        type: 'rest',
+        baseUrl: 'www.test.com'
+      });
+      const data = client.request<any>({
+        path: '/public/v1/users',
+        method: 'POST',
+        bodyParser<T>(body: any): T {
+          return JSON.parse(body.clientData);
+        }
+      });
+      await expect(data).rejects.toThrowError(BodyParserFail);
       jest.restoreAllMocks();
     });
   });
