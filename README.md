@@ -129,7 +129,7 @@ async function testSoap() {
       }
     },
     bodyParser<T>(body: any): T {
-      //Is optional, returns any pardes property as response body
+      //Allows you to parse any property inside the response body, and re-assign it
       return JSON.parse(body.clientData);
     }
   });
@@ -193,7 +193,7 @@ async function restTest() {
       }
     },
     bodyParser<T>(body: any): T {
-      //Is optional, returns any pardes property as response body
+      //Allows you to parse any property inside the response body, and re-assign it
       return JSON.parse(body.clientData);
     }
   });
@@ -241,7 +241,7 @@ async function generatorTest() {
       console.log(info);
     },
     bodyParser<T>(body: any): T {
-      //Is optional, returns any pardes property as response body
+      //Allows you to parse any property inside the response body, and re-assign it
       return JSON.parse(body.clientData);
   });
 
