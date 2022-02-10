@@ -59,6 +59,7 @@ interface BaseRequest {
   isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   shouldRetryCallback?: shouldRetryCallback;
   callback?: Callback;
+  bodyParser?: BodyParser;
 }
 
 export interface SoapRequest extends BaseRequest {
@@ -122,10 +123,13 @@ export type Callback = (
   info: Info
 ) => Promise<void> | void;
 
+export type BodyParser = (body: any) => any;
+
 interface MCBaseClientConfig {
   retry?: Retry;
   isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   ssl?: SSL;
+  bodyParser?: BodyParser;
 }
 
 export interface SslSecurity {
