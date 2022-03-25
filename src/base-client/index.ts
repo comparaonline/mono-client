@@ -12,7 +12,7 @@ export abstract class Client {
   protected generateUrl(basePath: string, path: string, pathParams: PathParams = {}): string {
     const cleanPath = path ? `/${path.replace(/^[\/]/, '')}` : '';
     let baseUrl = `${basePath.replace(/[\/]$/, '')}${cleanPath}`;
-    const pendingParams = baseUrl.match(/{.*}/g) ?? [];
+    const pendingParams = baseUrl.match(/{(.*?)}/g) ?? [];
     for (const curlyParam of pendingParams) {
       const param = curlyParam.replace(/[{}]/g, '');
       if (pathParams[param] == null) {
