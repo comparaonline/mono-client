@@ -1,3 +1,4 @@
+import { formatResponseErrorMessage } from '../helpers';
 import { MonoClientRequest, MonoClientResponse } from '../interfaces';
 
 export class InvalidMaxRetry extends Error {
@@ -19,7 +20,9 @@ export class RequestFail extends Error {
     public response: MonoClientResponse,
     public error: Error
   ) {
-    super(`Request Fail - ${response.statusCode} - ${error.message}`);
+    super(
+      `Request Fail - ${response.statusCode} - ${formatResponseErrorMessage(type, error, request)}`
+    );
   }
 }
 
