@@ -47,6 +47,22 @@ describe('Rest client', () => {
           expect(data.statusCode).toBe(200);
           expect(callback).toHaveBeenCalled();
         });
+
+        it('Should complete with more complex path params', async () => {
+          const callback = jest.fn();
+          const data = await client.request<any>({
+            overwriteBaseUrl: 'https://6241e54d9ba1585b34027078.mockapi.io',
+            path: '/users/{userId}/posts/{postId}/comments',
+            method: 'GET',
+            pathParams: {
+              userId: 1,
+              postId: 1
+            },
+            callback
+          });
+          expect(data.statusCode).toBe(200);
+          expect(callback).toHaveBeenCalled();
+        });
         it('Should use a different API', async () => {
           const LOCATION_ID = 3;
           const data = await client.request<any>({
