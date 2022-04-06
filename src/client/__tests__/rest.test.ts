@@ -33,6 +33,7 @@ describe('Rest client', () => {
           });
           expect(data.statusCode).toBe(200);
           expect(data.body.meta.pagination.page).toBe(PAGE);
+          expect(data.url).toBe('https://gorest.co.in:443/public/v1/users?page=2');
         });
         it('Should complete path params', async () => {
           const callback = jest.fn();
@@ -207,7 +208,8 @@ describe('Rest client', () => {
             raw: {
               request: '',
               response: ''
-            }
+            },
+            url: 'https://gorest.co.in/api/mocked-with-jest'
           },
           {
             attempt: 1,
