@@ -31,7 +31,8 @@ export class RestClient extends Client {
         raw: {
           request: typeof params.body === 'object' ? JSON.stringify(params.body) : '',
           response: typeof response.data === 'object' ? JSON.stringify(response.data) : ''
-        }
+        },
+        url: response.request?._redirectable?._currentUrl ?? url
       };
     } catch (e: any) {
       const error: AxiosError = e;
@@ -44,7 +45,8 @@ export class RestClient extends Client {
         raw: {
           request: typeof params.body === 'object' ? JSON.stringify(params.body) : '',
           response: typeof body === 'object' ? JSON.stringify(body) : ''
-        }
+        },
+        url: error.response?.request?._redirectable?._currentUrl ?? url
       };
     }
   }

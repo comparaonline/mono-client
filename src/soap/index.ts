@@ -30,30 +30,9 @@ interface SoapError {
   body: string;
 }
 
-interface SoapError {
-  root: object;
-  response: {
-    status: number;
-    statusText: null | string;
-    headers: Headers;
-    config: {
-      url: string;
-      method: string;
-      data: string;
-      headers: Headers;
-      timeout: number;
-    };
-    request: {
-      path: string;
-      headers: Headers;
-    };
-    data: string;
-  };
-  body: string;
-}
-
 interface SoapResponse {
   result: object;
+  url: string;
   rawResponse: string;
   soapHeader?: { [key: string]: any };
   rawRequest: string;
@@ -108,10 +87,18 @@ export class SoapClient extends BaseClient {
               result: err?.root ?? {},
               rawResponse: err?.body ?? '',
               rawRequest: err?.response?.config?.data ?? '',
-              soapHeader: err?.response?.headers ?? {}
+              soapHeader: err?.response?.headers ?? {},
+              url: err?.response?.config?.url ?? ''
             });
           } else {
-            resolve({ result, rawResponse, soapHeader, rawRequest, statusCode: 200 });
+            resolve({
+              result,
+              rawResponse,
+              soapHeader,
+              rawRequest,
+              statusCode: 200,
+              url: client.wsdl.uri
+            });
           }
         }
       );
@@ -133,7 +120,8 @@ export class SoapClient extends BaseClient {
       raw: {
         request: results.rawRequest,
         response: results.rawResponse
-      }
+      },
+      url: results.url
     };
   }
 }

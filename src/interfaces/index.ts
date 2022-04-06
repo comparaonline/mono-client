@@ -85,6 +85,7 @@ export interface MonoClientResponse {
   headers: Headers;
   statusCode: number;
   message?: string;
+  url: string;
   raw: {
     request: string;
     response: string;
