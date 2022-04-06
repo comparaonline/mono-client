@@ -98,7 +98,8 @@ describe('Mono client', () => {
               raw: {
                 request: '',
                 response: ''
-              }
+              },
+              url: ''
             });
           });
         });
@@ -133,7 +134,8 @@ describe('Mono client', () => {
               raw: {
                 request: '',
                 response: ''
-              }
+              },
+              url: ''
             });
           });
         });
@@ -170,7 +172,8 @@ describe('Mono client', () => {
               raw: {
                 request: '',
                 response: ''
-              }
+              },
+              url: ''
             });
           });
         });
@@ -206,7 +209,8 @@ describe('Mono client', () => {
               raw: {
                 request: '',
                 response: ''
-              }
+              },
+              url: ''
             });
           });
         });
@@ -239,7 +243,8 @@ describe('Mono client', () => {
               raw: {
                 request: '',
                 response: ''
-              }
+              },
+              url: ''
             });
           });
         });
