@@ -103,7 +103,9 @@ export class MonoClient<
     const response = await this.client.request(request as any);
     const bodyParsed = this.bodyParser(request, response);
     const isSuccessfulResponse =
-      bodyParsed instanceof BodyParserFail ? false : this.isSuccessful(request, response);
+      bodyParsed instanceof BodyParserFail
+        ? false
+        : this.isSuccessful(request, { ...response, body: bodyParsed });
     const isSuccessful = isSuccessfulResponse === true;
     const callback = request.callback ?? this.config.callback;
     if (callback != null) {
