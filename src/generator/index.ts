@@ -45,7 +45,8 @@ export class MonoClientGenerator {
         retry: params.retry,
         ssl: params.ssl,
         extra,
-        callback: this.params.callback
+        callback: this.params.callback,
+        bodyParser: params.bodyParser
       });
     } else {
       return new MonoClient<SoapClientConfig>({
@@ -55,7 +56,8 @@ export class MonoClientGenerator {
         ssl: params.ssl,
         wsdl: params.wsdl,
         extra,
-        callback: this.params.callback
+        callback: this.params.callback,
+        bodyParser: params.bodyParser
       });
     }
   }
