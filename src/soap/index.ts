@@ -56,7 +56,8 @@ export class SoapClient extends BaseClient {
   private async getClient(params: SoapRequest): Promise<Client> {
     const options = {
       wsdl_headers: params.headers,
-      ...(await this.getRequestAgentConfig(params))
+      ...(await this.getRequestAgentConfig(params)),
+      ...params.additionalRequestOptions
     };
     if (params.overwriteWsdl != null) {
       return await createClientAsync(params.overwriteWsdl, {});
