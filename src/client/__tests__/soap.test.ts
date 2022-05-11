@@ -164,5 +164,72 @@ describe('Soap client', () => {
       },
       CASSETTES_PATH
     );
+    describeRecording(
+      'force namespace',
+      () => {
+        it('Should quote', async () => {
+          const client = new MonoClient({
+            type: 'soap',
+            wsdl: 'https://integraparceiro.travelace.com.br/TravelAceService.svc?wsdl'
+          });
+          const additionalRequestOptions = {
+            rejectUnauthorized: false,
+            strictSSL: false,
+            overrideRootElement: {
+              namespace: 'tnsa',
+              xmlnsAttributes: [
+                {
+                  name: 'xmlns:tnsa',
+                  value: 'https://integraparceiro.travelace.com.br'
+                },
+                {
+                  name: 'xmlns:arr',
+                  value: 'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
+                },
+                {
+                  name: 'xmlns:trav',
+                  value:
+                    'http://schemas.datacontract.org/2004/07/TravelAce.InTravel.IntegraParceiro'
+                }
+              ]
+            }
+          };
+          const passengers = [22, 25, 30].map(() => ({
+            'trav:DataNascimento': '1999-01-01',
+            'trav:Nome': 'Test Passenger'
+          }));
+          const data = await client.request<any>({
+            method: 'SimulacaoCompra',
+            body: {
+              'tnsa:request': {
+                'trav:Classificacoes': {
+                  'arr:int': 4
+                },
+                'trav:DataRetorno': '2022-05-21',
+                'trav:DataSaida': '2022-05-12',
+                'trav:Destinos': {
+                  ':arr:string': ['fr', 'za', 'cn']
+                },
+                'trav:Passageiros': {
+                  'trav:PassageiroRequest': passengers
+                },
+                'trav:TipoTarifa': 1,
+                'trav:TipoViagem': 1
+              },
+              'tns:autenticacao': {
+                'trav:Senha': 'compara123456',
+                'trav:Usuario': 'williamsilva'
+              }
+            },
+            additionalRequestOptions
+          });
+          expect(data.statusCode).toBe(200);
+          expect(data.body.SimulacaoCompraResult.Produtos.ProdutoCotacao).toEqual(
+            expect.any(Array)
+          );
+        });
+      },
+      CASSETTES_PATH
+    );
   });
 });
