@@ -68,6 +68,7 @@ export interface SoapRequest extends BaseRequest {
   overwriteWsdl?: string;
   method: string;
   additionalRequestOptions?: IOptions;
+  overwriteEndpoint?: string;
 }
 
 export interface RestRequest extends BaseRequest {

@@ -113,6 +113,9 @@ export class SoapClient extends BaseClient {
     if (client[params.method] == null) {
       throw new MissingSoapMethod(params.method);
     }
+    if (params.overwriteEndpoint != null) {
+      client.setEndpoint(params.overwriteEndpoint);
+    }
     const results = await this.soapRequest(client, params.method, params.body);
     return {
       body: results.result,
