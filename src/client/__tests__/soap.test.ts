@@ -238,7 +238,7 @@ describe('Change endpoint', () => {
     type: 'soap',
     wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL'
   });
-  it('Should multiply two numbers', async () => {
+  it('Change wsdl', async () => {
     jest.spyOn(HttpClient.prototype, 'request').mockImplementation((...args) => {
       const result =
         '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><MultiplyResponse xmlns="http://tempuri.org/"><MultiplyResult>20</MultiplyResult></MultiplyResponse></soap:Body></soap:Envelope>';
@@ -258,6 +258,36 @@ describe('Change endpoint', () => {
     });
     const data = await client.request<any>({
       overwriteWsdl: WSDL_PATH,
+      method: 'Multiply',
+      body: {
+        intA: 3,
+        intB: 6
+      },
+      overwriteEndpoint: 'https:newHost'
+    });
+    expect(data.statusCode).toBe(200);
+    expect(data.body.MultiplyResult).toBe(20);
+    jest.restoreAllMocks();
+  });
+  it('No change wsdl', async () => {
+    jest.spyOn(HttpClient.prototype, 'request').mockImplementation((...args) => {
+      const result =
+        '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><MultiplyResponse xmlns="http://tempuri.org/"><MultiplyResult>20</MultiplyResult></MultiplyResponse></soap:Body></soap:Envelope>';
+      const response = {
+        data: result,
+        status: 200,
+        statusText: 'success',
+        headers: {},
+        config: {}
+      };
+      if (args[0] !== 'https:newHost') {
+        response.status = 500;
+      }
+      const res = Promise.resolve(response);
+      args[2](response.status === 200 ? null : 'Error', res, result);
+      return res;
+    });
+    const data = await client.request<any>({
       method: 'Multiply',
       body: {
         intA: 3,

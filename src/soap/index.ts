@@ -60,11 +60,18 @@ export class SoapClient extends BaseClient {
       ...params.additionalRequestOptions
     };
     if (params.overwriteWsdl != null) {
-      return await createClientAsync(params.overwriteWsdl, {});
+      return await createClientAsync(params.overwriteWsdl, undefined, params.overwriteEndpoint);
     }
     if (this.config.wsdl != null) {
       if (this.soapClient == null) {
-        this.soapClient = await createClientAsync(this.config.wsdl, options);
+        this.soapClient = await createClientAsync(
+          this.config.wsdl,
+          options,
+          params.overwriteEndpoint
+        );
+      }
+      if (params.overwriteEndpoint != null) {
+        this.soapClient.setEndpoint(params.overwriteEndpoint);
       }
       return this.soapClient;
     }
@@ -112,9 +119,6 @@ export class SoapClient extends BaseClient {
     }
     if (client[params.method] == null) {
       throw new MissingSoapMethod(params.method);
-    }
-    if (params.overwriteEndpoint != null) {
-      client.setEndpoint(params.overwriteEndpoint);
     }
     const results = await this.soapRequest(client, params.method, params.body);
     return {
