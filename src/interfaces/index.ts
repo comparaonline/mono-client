@@ -165,6 +165,7 @@ type SSL = SslSecurity | SslPfxSecurity | SSLReject;
 export interface SoapBaseClientConfig extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
+  overwriteEndpoint?: string;
 }
 
 export interface RestBaseClientConfig extends MCBaseClientConfig {

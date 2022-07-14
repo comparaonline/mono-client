@@ -60,7 +60,7 @@ export class SoapClient extends BaseClient {
       ...params.additionalRequestOptions
     };
     if (params.overwriteWsdl != null) {
-      return await createClientAsync(params.overwriteWsdl, undefined, params.overwriteEndpoint);
+      return await createClientAsync(params.overwriteWsdl, options, params.overwriteEndpoint);
     }
     if (this.config.wsdl != null) {
       if (this.soapClient == null) {
