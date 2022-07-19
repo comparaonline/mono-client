@@ -1,11 +1,11 @@
-import { MonoClient } from '..';
 import { InvalidMaxRetry, RequestFail } from '../../exceptions';
 import { StatusCode } from '../../interfaces';
 import { RestClient } from '../../rest';
 import { describeRecording } from '@comparaonline/test-helpers';
+import { MonoClient } from '../index';
+import { Client } from 'soap';
 
 const CASSETTES_PATH = 'client/base';
-
 describe('Mono client', () => {
   describe('base config', () => {
     it('Should throw a invalid max retry exception', async () => {
@@ -272,4 +272,31 @@ describe('Mono client', () => {
     },
     CASSETTES_PATH
   );
+
+  describe('soap client', () => {
+    it('success use overrideEndpoint in create client', async () => {
+      jest.spyOn(Client.prototype, 'setEndpoint').mockImplementation((...args) => {
+        if (args[0] != 'https:newHost') {
+          throw 'Error not change endpoint';
+        }
+      });
+      const callback = jest.fn();
+      const client = new MonoClient({
+        type: 'soap',
+        wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL',
+        overwriteEndpoint: 'https:newHost',
+        callback
+      });
+      const data = await client.request<any>({
+        method: 'Multiply',
+        body: {
+          intA: 3,
+          intB: 6
+        }
+      });
+      expect(data.statusCode).toBe(200);
+      expect(data.body.MultiplyResult).toBe(18);
+      jest.restoreAllMocks();
+    });
+  });
 });
