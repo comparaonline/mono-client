@@ -59,12 +59,16 @@ export class SoapClient extends BaseClient {
       ...(await this.getRequestAgentConfig(params)),
       ...params.additionalRequestOptions
     };
+    const overwriteEndpoint = params.overwriteEndpoint ?? this.config.overwriteEndpoint;
     if (params.overwriteWsdl != null) {
-      return await createClientAsync(params.overwriteWsdl, {});
+      return await createClientAsync(params.overwriteWsdl, options, overwriteEndpoint);
     }
     if (this.config.wsdl != null) {
       if (this.soapClient == null) {
         this.soapClient = await createClientAsync(this.config.wsdl, options);
+      }
+      if (overwriteEndpoint != null) {
+        this.soapClient.setEndpoint(overwriteEndpoint);
       }
       return this.soapClient;
     }

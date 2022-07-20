@@ -68,6 +68,7 @@ export interface SoapRequest extends BaseRequest {
   overwriteWsdl?: string;
   method: string;
   additionalRequestOptions?: IOptions;
+  overwriteEndpoint?: string;
 }
 
 export interface RestRequest extends BaseRequest {
@@ -164,6 +165,7 @@ type SSL = SslSecurity | SslPfxSecurity | SSLReject;
 export interface SoapBaseClientConfig extends MCBaseClientConfig {
   type: 'soap';
   wsdl?: string;
+  overwriteEndpoint?: string;
 }
 
 export interface RestBaseClientConfig extends MCBaseClientConfig {

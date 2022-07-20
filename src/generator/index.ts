@@ -57,7 +57,8 @@ export class MonoClientGenerator {
         wsdl: params.wsdl,
         extra,
         callback: this.params.callback,
-        bodyParser: params.bodyParser
+        bodyParser: params.bodyParser,
+        overwriteEndpoint: params.overwriteEndpoint
       });
     }
   }
