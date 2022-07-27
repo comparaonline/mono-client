@@ -138,8 +138,8 @@ interface MCBaseClientConfig {
 
 export interface SslSecurity {
   type: 'ssl-security';
-  /** Buffer or path, path will use process.cwd to get absolute path */
-  key: string | Buffer;
+  /** Buffer or path, path will use process.cwd to get absolute path. If undefined then empty string will be used as key */
+  key?: string | Buffer;
   /** Buffer or path, path will use process.cwd to get absolute path */
   cert: string | Buffer;
   /** Buffer or path, path will use process.cwd to get absolute path */
