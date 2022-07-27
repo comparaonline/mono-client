@@ -36,8 +36,8 @@ export abstract class Client {
       throw new ClientBadConfiguration('HTTPS Agent requested without SSL configuration');
     }
     if (ssl.type === 'ssl-security') {
-      const key = await this.readFile(ssl.key);
       const cert = await this.readFile(ssl.cert);
+      const key = ssl.key != null ? await this.readFile(ssl.key) : '';
       const ca = ssl.ca == null ? ssl.ca : await this.readFile(ssl.ca);
       return new Agent({
         key,

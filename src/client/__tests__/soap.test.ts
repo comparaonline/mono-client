@@ -86,7 +86,6 @@ describe('Soap client', () => {
             wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL',
             ssl: {
               type: 'ssl-security',
-              key: Buffer.from(''),
               cert: Buffer.from('')
             }
           });
