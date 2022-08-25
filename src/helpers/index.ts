@@ -13,3 +13,9 @@ export function formatResponseErrorMessage(
   }
   return error.message;
 }
+
+export function delay(secondsToWait: number): Promise<any> {
+  const oneSecondInMilliseconds = 1000;
+  const timeToWait = secondsToWait * oneSecondInMilliseconds;
+  return new Promise((resolve) => setTimeout(resolve, timeToWait));
+}

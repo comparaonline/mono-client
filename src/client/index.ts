@@ -11,6 +11,7 @@ import {
   IsSuccessfulCallbackReturn
 } from '../interfaces';
 import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
+import { delay } from '../helpers';
 
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
@@ -27,43 +28,47 @@ export class MonoClient<
   R = C extends SoapClientConfig ? SoapRequest : RestRequest
 > {
   private client: SoapClient | RestClient;
+
   constructor(private config: C) {
     this.client = config.type === 'rest' ? new RestClient(config) : new SoapClient(config);
   }
-  private matchStatusCode(currentStatus: number, matchs: StatusCode[]): boolean {
-    if (matchs.includes(currentStatus)) {
+
+  private matchStatusCode(currentStatus: number, matches: StatusCode[]): boolean {
+    if (matches.includes(currentStatus)) {
       return true;
     }
-    if (matchs.includes(StatusCode.S4XX) && currentStatus >= 400 && currentStatus < 500) {
+    if (matches.includes(StatusCode.S4XX) && currentStatus >= 400 && currentStatus < 500) {
       return true;
     }
-    if (matchs.includes(StatusCode.S5XX) && currentStatus >= 500 && currentStatus < 600) {
+    if (matches.includes(StatusCode.S5XX) && currentStatus >= 500 && currentStatus < 600) {
       return true;
     }
     return false;
   }
+
   private shouldRetry(request: MonoClientRequest, response: MonoClientResponse): boolean {
-    if (this.config.retry != null) {
-      if (request.shouldRetryCallback != null) {
-        return request.shouldRetryCallback(request, response);
-      }
-      if (this.config.retry.shouldRetryCallback != null) {
-        return this.config.retry.shouldRetryCallback(request, response);
-      }
-      if (
-        this.config.retry.notOn != null &&
-        this.matchStatusCode(response.statusCode, this.config.retry.notOn)
-      ) {
-        return false;
-      }
-      if (this.config.retry.on != null) {
-        return this.matchStatusCode(response.statusCode, this.config.retry.on);
-      }
-      return true;
-    }
     /* istanbul ignore next */
-    return false;
+    if (this.config.retry == null) {
+      return false;
+    }
+    if (request.shouldRetryCallback != null) {
+      return request.shouldRetryCallback(request, response);
+    }
+    if (this.config.retry.shouldRetryCallback != null) {
+      return this.config.retry.shouldRetryCallback(request, response);
+    }
+    if (
+      this.config.retry.notOn != null &&
+      this.matchStatusCode(response.statusCode, this.config.retry.notOn)
+    ) {
+      return false;
+    }
+    if (this.config.retry.on != null) {
+      return this.matchStatusCode(response.statusCode, this.config.retry.on);
+    }
+    return true;
   }
+
   private isSuccessful(
     request: MonoClientRequest,
     response: MonoClientResponse
@@ -128,6 +133,13 @@ export class MonoClient<
     }
 
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
+      if (
+        this.config.retry != null &&
+        this.config.retry.delayInSeconds != null &&
+        this.config.retry.delayInSeconds > 0
+      ) {
+        await delay(this.config.retry.delayInSeconds);
+      }
       return this.requestAttempt({ request, maxAttempt, attempt: attempt + 1 });
     }
 

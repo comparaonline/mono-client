@@ -48,7 +48,8 @@ describe('Mono client', () => {
           retry: {
             maxRetry: 1,
             on: [StatusCode.S4XX],
-            notOn: [StatusCode.E400]
+            notOn: [StatusCode.E400],
+            delayInSeconds: 1
           },
           baseUrl: 'https://gorest.co.in',
           extra: {
