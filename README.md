@@ -190,7 +190,8 @@ async function restTest() {
       shouldRetryCallback(request, response) {
         // This will overwrite retry on and notOn
         return response.body.Error === 'server timeout';
-      }
+      },
+      delayInSeconds: 5 // time in seconds between retries
     },
     bodyParser<T>(body: any): T {
       //Allows you to parse any property inside the response body, and re-assign it

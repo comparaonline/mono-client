@@ -119,6 +119,7 @@ export interface Retry {
   on?: StatusCode[];
   notOn?: StatusCode[];
   shouldRetryCallback?: shouldRetryCallback;
+  delayInSeconds?: number;
 }
 
 export type Callback = (
