@@ -8,7 +8,8 @@ import {
   SoapRequest,
   MonoClientResponse,
   StatusCode,
-  IsSuccessfulCallbackReturn
+  IsSuccessfulCallbackReturn,
+  Retry
 } from '../interfaces';
 import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
 import { delay } from '../helpers';
@@ -28,9 +29,11 @@ export class MonoClient<
   R = C extends SoapClientConfig ? SoapRequest : RestRequest
 > {
   private client: SoapClient | RestClient;
+  private retry: Retry;
 
   constructor(private config: C) {
     this.client = config.type === 'rest' ? new RestClient(config) : new SoapClient(config);
+    this.retry = this.config.retry ?? { maxRetry: 0 };
   }
 
   private matchStatusCode(currentStatus: number, matches: StatusCode[]): boolean {
@@ -47,24 +50,17 @@ export class MonoClient<
   }
 
   private shouldRetry(request: MonoClientRequest, response: MonoClientResponse): boolean {
-    /* istanbul ignore next */
-    if (this.config.retry == null) {
-      return false;
-    }
     if (request.shouldRetryCallback != null) {
       return request.shouldRetryCallback(request, response);
     }
-    if (this.config.retry.shouldRetryCallback != null) {
-      return this.config.retry.shouldRetryCallback(request, response);
+    if (this.retry.shouldRetryCallback != null) {
+      return this.retry.shouldRetryCallback(request, response);
     }
-    if (
-      this.config.retry.notOn != null &&
-      this.matchStatusCode(response.statusCode, this.config.retry.notOn)
-    ) {
+    if (this.retry.notOn != null && this.matchStatusCode(response.statusCode, this.retry.notOn)) {
       return false;
     }
-    if (this.config.retry.on != null) {
-      return this.matchStatusCode(response.statusCode, this.config.retry.on);
+    if (this.retry.on != null) {
+      return this.matchStatusCode(response.statusCode, this.retry.on);
     }
     return true;
   }
@@ -133,12 +129,8 @@ export class MonoClient<
     }
 
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
-      if (
-        this.config.retry != null &&
-        this.config.retry.delayInSeconds != null &&
-        this.config.retry.delayInSeconds > 0
-      ) {
-        await delay(this.config.retry.delayInSeconds);
+      if (this.retry.delayInSeconds != null && this.retry.delayInSeconds > 0) {
+        await delay(this.retry.delayInSeconds);
       }
       return this.requestAttempt({ request, maxAttempt, attempt: attempt + 1 });
     }
@@ -154,11 +146,10 @@ export class MonoClient<
   }
 
   async request<T>(params: R): Promise<TemplateResponse<T>> {
-    const maxRetry = this.config.retry?.maxRetry ?? 0;
-    if (maxRetry < 0) {
-      throw new InvalidMaxRetry(maxRetry);
+    if (this.retry.maxRetry < 0) {
+      throw new InvalidMaxRetry(this.retry.maxRetry);
     }
-    const maxAttempt = maxRetry + 1;
+    const maxAttempt = this.retry.maxRetry + 1;
     return this.requestAttempt({ request: params as any, maxAttempt, attempt: 0 });
   }
 }
