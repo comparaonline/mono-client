@@ -3,7 +3,7 @@ import { SoapClientConfig, SoapRequest, MonoClientResponse, Headers } from '../i
 import { Client, createClientAsync } from 'soap';
 import {
   ClientBadConfiguration,
-  MissingMandatoryParamenter,
+  MissingMandatoryParameter,
   MissingSoapMethod
 } from '../exceptions';
 import axios from 'axios';
@@ -14,13 +14,7 @@ interface SoapError {
     status: number;
     statusText: null | string;
     headers: Headers;
-    config: {
-      url: string;
-      method: string;
-      data: string;
-      headers: Headers;
-      timeout: number;
-    };
+    config: SoapErrorConfig;
     request: {
       path: string;
       headers: Headers;
@@ -28,6 +22,16 @@ interface SoapError {
     data: string;
   };
   body: string;
+  config?: SoapErrorConfig;
+  code?: string;
+}
+
+interface SoapErrorConfig {
+  url: string;
+  method: string;
+  data: string;
+  headers: Headers;
+  timeout: number;
 }
 
 interface SoapResponse {
@@ -90,10 +94,10 @@ export class SoapClient extends BaseClient {
             resolve({
               statusCode: err?.response?.status ?? 500,
               result: err?.root ?? {},
-              rawResponse: err?.body ?? '',
-              rawRequest: err?.response?.config?.data ?? '',
+              rawResponse: err?.body ?? err?.code ?? '',
+              rawRequest: err?.config?.data ?? err?.response?.config?.data ?? '',
               soapHeader: err?.response?.headers ?? {},
-              url: err?.response?.config?.url ?? ''
+              url: err?.config?.url ?? err?.response?.config?.url ?? ''
             });
           } else {
             resolve({
@@ -112,7 +116,7 @@ export class SoapClient extends BaseClient {
   async request(params: SoapRequest): Promise<MonoClientResponse> {
     const client = await this.getClient(params);
     if (params.method == null || params.method.trim().length === 0) {
-      throw new MissingMandatoryParamenter('method');
+      throw new MissingMandatoryParameter('method');
     }
     if (client[params.method] == null) {
       throw new MissingSoapMethod(params.method);

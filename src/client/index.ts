@@ -65,29 +65,51 @@ export class MonoClient<
     return true;
   }
 
+  private isErrorStatusCode(response: MonoClientResponse): boolean {
+    return response.statusCode !== 200 && response.statusCode !== 201;
+  }
+
   private isSuccessful(
     request: MonoClientRequest,
     response: MonoClientResponse
   ): IsSuccessfulCallbackReturn<Error> {
+    const avoidIsSuccessfulCallback =
+      request.avoidIsSuccessfulCallback ?? this.config.avoidIsSuccessfulCallback ?? true;
+    if (this.isErrorStatusCode(response) && avoidIsSuccessfulCallback) {
+      const errorHandler = request.errorHandler ?? this.config.errorHandler;
+      if (errorHandler != null) {
+        try {
+          return errorHandler(response);
+        } catch (e: any) {
+          return e as Error;
+        }
+      }
+      return false;
+    }
     if (request.isSuccessfulCallback != null) {
       return request.isSuccessfulCallback(response);
     }
     if (this.config.isSuccessfulCallback != null) {
       return this.config.isSuccessfulCallback(response);
     }
-    if (response.statusCode === 200 || response.statusCode === 201) {
+    if (!this.isErrorStatusCode(response)) {
       return true;
     }
     return false;
   }
 
   private bodyParser(request: MonoClientRequest, response: MonoClientResponse): any {
+    const avoidBodyParserExecution =
+      request.avoidBodyParserExecution ?? this.config.avoidBodyParserExecution ?? true;
+    if (this.isErrorStatusCode(response) && avoidBodyParserExecution) {
+      return response.body;
+    }
     try {
       if (request.bodyParser != null) {
-        return request.bodyParser(response.body);
+        return request.bodyParser(response.body, response);
       }
       if (this.config.bodyParser != null) {
-        return this.config.bodyParser(response.body);
+        return this.config.bodyParser(response.body, response);
       }
     } catch (e: any) {
       return new BodyParserFail(this.config.type, request, response, e);

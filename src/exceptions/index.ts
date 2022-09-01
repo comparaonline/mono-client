@@ -49,7 +49,7 @@ export class MissingSoapMethod extends Error {
   }
 }
 
-export class MissingMandatoryParamenter extends Error {
+export class MissingMandatoryParameter extends Error {
   constructor(public param: string) {
     super(`Missing or invalid mandatory parameter - ${param}`);
   }

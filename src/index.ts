@@ -19,6 +19,7 @@ export {
   QueryParams,
   PathParams,
   StatusCode,
-  Retry
+  Retry,
+  ErrorHandler
 } from './interfaces';
 export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';

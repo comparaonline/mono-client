@@ -61,6 +61,9 @@ interface BaseRequest {
   shouldRetryCallback?: shouldRetryCallback;
   callback?: Callback;
   bodyParser?: BodyParser;
+  avoidBodyParserExecution?: boolean;
+  avoidIsSuccessfulCallback?: boolean;
+  errorHandler?: ErrorHandler;
 }
 
 export interface SoapRequest extends BaseRequest {
@@ -128,13 +131,21 @@ export type Callback = (
   info: Info
 ) => Promise<void> | void;
 
-export type BodyParser = (body: any) => any;
+export type BodyParser = (body: any, response: MonoClientResponse) => any;
+
+export type ErrorHandler = (response: MonoClientResponse) => Error | string;
 
 interface MCBaseClientConfig {
   retry?: Retry;
   isSuccessfulCallback?: IsSuccessfulCallback<Error>;
   ssl?: SSL;
   bodyParser?: BodyParser;
+  /** Default true - Prevent bodyParser execution if status code different from 200 or 201 */
+  avoidBodyParserExecution?: boolean;
+  /** Default true - Prevent isSuccessfulCallback execution if status code different from 200 or 201 */
+  avoidIsSuccessfulCallback?: boolean;
+  /** If avoidIsSuccessfulCallback is true you can use this callback to return the correct error message */
+  errorHandler?: ErrorHandler;
 }
 
 export interface SslSecurity {
