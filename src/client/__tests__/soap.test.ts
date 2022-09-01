@@ -1,7 +1,7 @@
 import { MonoClient } from '..';
 import {
   ClientBadConfiguration,
-  MissingMandatoryParamenter,
+  MissingMandatoryParameter,
   MissingSoapMethod,
   RequestFail
 } from '../../exceptions';
@@ -61,7 +61,7 @@ describe('Soap client', () => {
             method: '',
             body: {}
           });
-          await expect(req).rejects.toThrowError(MissingMandatoryParamenter);
+          await expect(req).rejects.toThrowError(MissingMandatoryParameter);
         });
         it('Should throw a missing soap method exception', async () => {
           const req = client.request({
