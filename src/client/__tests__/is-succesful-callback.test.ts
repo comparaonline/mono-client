@@ -276,9 +276,7 @@ describe('Is successful callback functionality', () => {
         method: 'POST'
       });
 
-      await expect(promise).rejects.toThrowError(
-        "Request Fail - 400 - Cannot read properties of undefined (reading 'anything')"
-      );
+      await expect(promise).rejects.toThrowError(/anything/);
       jest.restoreAllMocks();
     });
   });
