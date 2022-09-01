@@ -223,6 +223,7 @@ describe('Mono client', () => {
           isSuccessfulCallback(): boolean {
             return true;
           },
+          avoidIsSuccessfulCallback: false,
           baseUrl: 'https://gorest.co.in',
           callback
         });
@@ -264,7 +265,8 @@ describe('Mono client', () => {
           path: '/api/mocked-with-jest',
           isSuccessfulCallback(): boolean {
             return true;
-          }
+          },
+          avoidIsSuccessfulCallback: false
         });
         expect(response.body).toBe('Happy');
         expect(callback).toHaveBeenCalledTimes(1);
