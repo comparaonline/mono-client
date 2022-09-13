@@ -128,4 +128,38 @@ describe('Client generator', () => {
       jest.restoreAllMocks();
     });
   });
+  describeRecording(
+    'serviceId like object',
+    () => {
+      it('Should create a soap client', async () => {
+        const callback = jest.fn();
+        const generator = new MonoClientGenerator({
+          businessUnit,
+          callback
+        });
+        const serviceId = 'my-service-that-uses-soap';
+        const requestId = 2;
+        const client = generator.get(
+          {
+            type: 'soap',
+            wsdl: 'http://www.dneonline.com/calculator.asmx?WSDL'
+          },
+          { serviceId, additionalData: { vertical: 'travel', country: 'br', something: 'foo' } },
+          requestId
+        );
+        await client.request({ body: { IntA: 1, IntB: 0 }, method: 'Add' });
+        expect(callback).toHaveBeenCalledWith(expect.any(Object), expect.any(Object), {
+          requestId,
+          serviceId,
+          businessUnit,
+          requestDate: expect.any(Date),
+          requestTime: expect.any(Number),
+          attempt: expect.any(Number),
+          isSuccessful: expect.any(Boolean),
+          additionalData: expect.any(Object)
+        });
+      });
+    },
+    CASSETTES_PATH
+  );
 });

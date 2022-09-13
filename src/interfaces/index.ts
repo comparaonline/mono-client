@@ -102,6 +102,7 @@ export interface Extra {
   requestId?: string | number;
   businessUnit?: string;
   serviceId?: string | number;
+  additionalData?: object;
 }
 
 export interface Info extends Extra {
@@ -196,3 +197,8 @@ export type SoapClientConfig = SoapBaseClientConfig & ExtendedConfig;
 export type RestClientConfig = RestBaseClientConfig & ExtendedConfig;
 
 export type ClientConfig = SoapClientConfig | RestClientConfig;
+
+export interface ServiceIdExtended {
+  serviceId: string;
+  additionalData?: object;
+}

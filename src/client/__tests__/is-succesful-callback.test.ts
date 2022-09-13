@@ -111,6 +111,28 @@ describe('Is successful callback functionality', () => {
       await expect(promise).rejects.toThrowError('Request Fail - 400 - bad-request');
       jest.restoreAllMocks();
     });
+
+    it('isSuccessfulCallback - catch', async () => {
+      jest.spyOn(axios, 'request').mockImplementation(() => {
+        return successful200Response;
+      });
+      const client = new MonoClient({
+        type: 'rest',
+        baseUrl: 'www.test.com',
+        isSuccessfulCallback(response): boolean {
+          return response.body.something.message === 'ok';
+        }
+      });
+      const data = client.request<any>({
+        path: '/public/v1/users',
+        method: 'POST'
+      });
+
+      await expect(data).rejects.toThrowError(
+        "Request Fail - 200 - Cannot read properties of undefined (reading 'message')"
+      );
+      jest.restoreAllMocks();
+    });
   });
 
   describe('Not execute if fail', () => {

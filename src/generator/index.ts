@@ -6,7 +6,8 @@ import {
   RestClientConfig,
   SoapClientConfig,
   RestRequest,
-  SoapRequest
+  SoapRequest,
+  ServiceIdExtended
 } from '../interfaces';
 
 interface Params {
@@ -19,24 +20,26 @@ export class MonoClientGenerator {
 
   get(
     params: SoapBaseClientConfig,
-    serviceId?: string | number,
+    serviceId?: string | number | ServiceIdExtended,
     requestId?: string | number
   ): MonoClient<SoapClientConfig, SoapRequest>;
   get(
     params: RestBaseClientConfig,
-    serviceId?: string | number,
+    serviceId?: string | number | ServiceIdExtended,
     requestId?: string | number
   ): MonoClient<RestClientConfig, RestRequest>;
   get(
     params: SoapBaseClientConfig | RestBaseClientConfig,
-    serviceId?: string | number,
+    serviceId?: string | number | ServiceIdExtended,
     requestId?: string | number
   ): MonoClient<SoapClientConfig | RestClientConfig> {
     const extra = {
       requestId,
-      serviceId: serviceId,
-      businessUnit: this.params.businessUnit
+      serviceId: isServiceIdExtended(serviceId) ? serviceId.serviceId : serviceId,
+      businessUnit: this.params.businessUnit,
+      additionalData: isServiceIdExtended(serviceId) ? serviceId.additionalData : undefined
     };
+
     if (params.type === 'rest') {
       return new MonoClient<RestClientConfig>({
         type: 'rest',
@@ -68,4 +71,8 @@ export class MonoClientGenerator {
       });
     }
   }
+}
+
+function isServiceIdExtended(object: any): object is ServiceIdExtended {
+  return typeof object != 'string' && typeof object != 'number' && 'serviceId' in object;
 }

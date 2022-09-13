@@ -86,11 +86,15 @@ export class MonoClient<
       }
       return false;
     }
-    if (request.isSuccessfulCallback != null) {
-      return request.isSuccessfulCallback(response);
-    }
-    if (this.config.isSuccessfulCallback != null) {
-      return this.config.isSuccessfulCallback(response);
+    try {
+      if (request.isSuccessfulCallback != null) {
+        return request.isSuccessfulCallback(response);
+      }
+      if (this.config.isSuccessfulCallback != null) {
+        return this.config.isSuccessfulCallback(response);
+      }
+    } catch (e: any) {
+      return e as Error;
     }
     if (!this.isErrorStatusCode(response)) {
       return true;
@@ -136,6 +140,7 @@ export class MonoClient<
         requestId: this.config.extra?.requestId,
         serviceId: this.config.extra?.serviceId,
         businessUnit: this.config.extra?.businessUnit,
+        additionalData: this.config.extra?.additionalData,
         requestDate: startDate,
         requestTime: Date.now() - startDate.getTime(),
         attempt: attempt + 1,
