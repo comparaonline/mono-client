@@ -199,6 +199,7 @@ export type RestClientConfig = RestBaseClientConfig & ExtendedConfig;
 export type ClientConfig = SoapClientConfig | RestClientConfig;
 
 export interface ServiceIdExtended {
-  serviceId: string;
+  serviceId?: string;
+  requestId?: string;
   additionalData?: object;
 }
