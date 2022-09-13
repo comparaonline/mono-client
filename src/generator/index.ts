@@ -30,8 +30,7 @@ export class MonoClientGenerator {
   ): MonoClient<RestClientConfig, RestRequest>;
   get(
     params: SoapBaseClientConfig,
-    serviceId?: ServiceIdExtended,
-    requestId?: string | number
+    serviceId?: ServiceIdExtended
   ): MonoClient<SoapClientConfig, SoapRequest>;
   get(
     params: RestBaseClientConfig,
