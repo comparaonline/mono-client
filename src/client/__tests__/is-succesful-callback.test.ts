@@ -128,9 +128,7 @@ describe('Is successful callback functionality', () => {
         method: 'POST'
       });
 
-      await expect(data).rejects.toThrowError(
-        "Request Fail - 200 - Cannot read properties of undefined (reading 'message')"
-      );
+      await expect(data).rejects.toThrowError(/message/);
       jest.restoreAllMocks();
     });
   });
