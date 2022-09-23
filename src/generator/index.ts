@@ -66,7 +66,8 @@ export class MonoClientGenerator {
         bodyParser: params.bodyParser,
         avoidBodyParserExecution: params.avoidBodyParserExecution,
         avoidIsSuccessfulCallback: params.avoidIsSuccessfulCallback,
-        errorHandler: params.errorHandler
+        errorHandler: params.errorHandler,
+        security: params.security
       });
     } else {
       return new MonoClient<SoapClientConfig>({
@@ -81,7 +82,8 @@ export class MonoClientGenerator {
         overwriteEndpoint: params.overwriteEndpoint,
         avoidBodyParserExecution: params.avoidBodyParserExecution,
         avoidIsSuccessfulCallback: params.avoidIsSuccessfulCallback,
-        errorHandler: params.errorHandler
+        errorHandler: params.errorHandler,
+        security: params.security
       });
     }
   }
