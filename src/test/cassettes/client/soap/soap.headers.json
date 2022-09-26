@@ -1,0 +1,30 @@
+[
+  {
+    "scope": "http://www.dneonline.com:80",
+    "method": "POST",
+    "path": "/calculator.asmx",
+    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:tm=\"http://microsoft.com/wsdl/mime/textMatching/\" xmlns:tns=\"http://tempuri.org/\"><soap:Header><randomHeader>123456789</randomHeader></soap:Header><soap:Body><Multiply xmlns=\"http://tempuri.org/\"><intA>3</intA><intB>6</intB></Multiply></soap:Body></soap:Envelope>",
+    "status": 200,
+    "response": "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><MultiplyResponse xmlns=\"http://tempuri.org/\"><MultiplyResult>18</MultiplyResult></MultiplyResponse></soap:Body></soap:Envelope>",
+    "rawHeaders": [
+      "Cache-Control",
+      "private, max-age=0",
+      "Content-Type",
+      "text/xml; charset=utf-8",
+      "Server",
+      "Microsoft-IIS/10.0",
+      "X-AspNet-Version",
+      "2.0.50727",
+      "X-Powered-By",
+      "ASP.NET",
+      "X-Powered-By-Plesk",
+      "PleskWin",
+      "Date",
+      "Thu, 22 Sep 2022 21:00:03 GMT",
+      "Connection",
+      "close",
+      "Content-Length",
+      "346"
+    ]
+  }
+]

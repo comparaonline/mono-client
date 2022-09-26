@@ -230,6 +230,34 @@ describe('Soap client', () => {
       },
       CASSETTES_PATH
     );
+    describeRecording(
+      'Headers',
+      () => {
+        it('Should add soap header', async () => {
+          const headersCallback = jest.fn();
+          await client.request<any>({
+            overwriteWsdl: WSDL_PATH,
+            method: 'Multiply',
+            body: {
+              intA: 3,
+              intB: 6
+            },
+            soapHeaders: {
+              randomHeader: 123456789
+            },
+            callback: headersCallback
+          });
+          const requestBody: string = headersCallback.mock.calls[0][1].raw.request;
+          expect(
+            requestBody.includes(
+              '<soap:Header><randomHeader>123456789</randomHeader></soap:Header>'
+            )
+          ).toBe(true);
+          jest.clearAllMocks();
+        });
+      },
+      CASSETTES_PATH
+    );
   });
 });
 describe('Change endpoint', () => {

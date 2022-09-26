@@ -13,6 +13,14 @@ export class RestClient extends Client {
       throw new ClientBadConfiguration('Missing baseUrl and overwriteBaseUrl');
     }
     const url = this.generateUrl(baseUrl, params.path, params.pathParams);
+
+    const authorizationHeader = this.getAuthorizationHeader(params);
+    if (authorizationHeader != null) {
+      if (params.headers == null) {
+        params.headers = {};
+      }
+      params.headers.Authorization = authorizationHeader;
+    }
     try {
       const response = await axios.request({
         url,

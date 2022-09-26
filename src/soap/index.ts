@@ -121,6 +121,16 @@ export class SoapClient extends BaseClient {
     if (client[params.method] == null) {
       throw new MissingSoapMethod(params.method);
     }
+    if (params.soapHeaders != null) {
+      for (const headerName of Object.keys(params.soapHeaders)) {
+        client.addSoapHeader({ [headerName]: params.soapHeaders[headerName] }, headerName);
+      }
+    }
+
+    const authorizationHeader = this.getAuthorizationHeader(params);
+    if (authorizationHeader != null) {
+      client.addHttpHeader('Authorization', authorizationHeader);
+    }
     const results = await this.soapRequest(client, params.method, params.body);
     return {
       body: results.result,

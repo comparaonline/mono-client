@@ -53,6 +53,20 @@ export interface Headers {
   [key: string]: string;
 }
 
+export interface HttpBasicSecurity {
+  basic: {
+    username: string;
+    password: string;
+  };
+}
+
+export interface HttpBearerSecurity {
+  /** Put the token without Bearer prefix */
+  bearer: string;
+}
+
+export type HttpSecurity = HttpBasicSecurity | HttpBearerSecurity;
+
 interface BaseRequest {
   headers?: Headers;
   /** Request timeout in ms, default to 120000 **/
@@ -64,6 +78,7 @@ interface BaseRequest {
   avoidBodyParserExecution?: boolean;
   avoidIsSuccessfulCallback?: boolean;
   errorHandler?: ErrorHandler;
+  security?: HttpSecurity;
 }
 
 export interface SoapRequest extends BaseRequest {
@@ -72,6 +87,7 @@ export interface SoapRequest extends BaseRequest {
   method: string;
   additionalRequestOptions?: IOptions;
   overwriteEndpoint?: string;
+  soapHeaders?: Record<string, any>;
 }
 
 export interface RestRequest extends BaseRequest {
@@ -147,6 +163,7 @@ interface MCBaseClientConfig {
   avoidIsSuccessfulCallback?: boolean;
   /** If avoidIsSuccessfulCallback is true you can use this callback to return the correct error message */
   errorHandler?: ErrorHandler;
+  security?: HttpSecurity;
 }
 
 export interface SslSecurity {

@@ -1,4 +1,11 @@
-import { ClientConfig, MonoClientRequest, MonoClientResponse, PathParams } from '../interfaces';
+import {
+  ClientConfig,
+  HttpBasicSecurity,
+  HttpBearerSecurity,
+  MonoClientRequest,
+  MonoClientResponse,
+  PathParams
+} from '../interfaces';
 import { ClientBadConfiguration, MissingPathParameter } from '../exceptions';
 import { Agent } from 'https';
 import { readFile } from 'fs/promises';
@@ -57,6 +64,32 @@ export abstract class Client {
         rejectUnauthorized: ssl.rejectUnauthorized
       });
     }
+  }
+
+  protected getAuthorizationHeader(params: MonoClientRequest): string | null {
+    const security = params.security ?? this.config.security;
+    if (this.isBasicSecurity(security)) {
+      return `Basic ${Buffer.from(`${security.basic.username}:${security.basic.password}`).toString(
+        'base64'
+      )}`;
+    }
+    if (this.isBearerSecurity(security)) {
+      return `Bearer ${security.bearer.replace(/bearer /i, '')}`;
+    }
+    return null;
+  }
+
+  private isBasicSecurity(security: any): security is HttpBasicSecurity {
+    return (
+      security != null &&
+      security.basic != null &&
+      security.basic.username != null &&
+      security.basic.password != null
+    );
+  }
+
+  private isBearerSecurity(security: any): security is HttpBearerSecurity {
+    return security != null && security.bearer != null;
   }
 
   abstract request(params: MonoClientRequest): Promise<MonoClientResponse>;
