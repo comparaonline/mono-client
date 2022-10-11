@@ -14,6 +14,7 @@ import {
 import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
 import { delay } from '../helpers';
 
+const SUCCESS_STATUS_CODE = [200, 201, 202];
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
 }
@@ -66,7 +67,7 @@ export class MonoClient<
   }
 
   private isErrorStatusCode(response: MonoClientResponse): boolean {
-    return response.statusCode !== 200 && response.statusCode !== 201;
+    return !SUCCESS_STATUS_CODE.includes(response.statusCode);
   }
 
   private isSuccessful(
