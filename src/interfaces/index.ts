@@ -220,3 +220,11 @@ export interface RequestInformation {
   requestId?: string;
   additionalData?: object;
 }
+
+export declare enum HttpMethods {
+  POST = 'POST',
+  GET = 'GET',
+  DELETE = 'DELETE',
+  PUT = 'PUT',
+  PATCH = 'PATCH'
+}
