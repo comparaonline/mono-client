@@ -221,7 +221,7 @@ export interface RequestInformation {
   additionalData?: object;
 }
 
-export declare enum HttpMethods {
+export enum HttpMethods {
   POST = 'POST',
   GET = 'GET',
   DELETE = 'DELETE',

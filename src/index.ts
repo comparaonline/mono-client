@@ -11,6 +11,7 @@ export {
   RestBaseClientConfig,
   SoapBaseClientConfig,
   Extra,
+  HttpMethods,
   Info,
   ClientConfig,
   RestClientConfig,
@@ -20,7 +21,6 @@ export {
   PathParams,
   StatusCode,
   Retry,
-  ErrorHandler,
-  HttpMethods
+  ErrorHandler
 } from './interfaces';
 export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
