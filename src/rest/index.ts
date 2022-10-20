@@ -1,7 +1,24 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, ResponseType } from 'axios';
 import { Client } from '../base-client';
 import { ClientBadConfiguration } from '../exceptions';
+import { toNonCircularObject } from '../helpers';
 import { RestClientConfig, RestRequest, MonoClientResponse } from '../interfaces';
+
+function toJson(object: any, responseType?: ResponseType): string {
+  try {
+    if (typeof object !== 'object' || object == null) {
+      return String(object ?? '');
+    }
+    if (responseType === 'stream') {
+      return JSON.stringify(toNonCircularObject(object));
+    } else {
+      return JSON.stringify(object);
+    }
+  } catch (e: any) {
+    /* istanbul ignore next */
+    return e.message;
+  }
+}
 
 export class RestClient extends Client {
   constructor(public config: RestClientConfig) {
@@ -37,8 +54,8 @@ export class RestClient extends Client {
         headers: response.headers,
         statusCode: response.status,
         raw: {
-          request: typeof params.body === 'object' ? JSON.stringify(params.body) : '',
-          response: typeof response.data === 'object' ? JSON.stringify(response.data) : ''
+          request: toJson(params.body, params.responseType),
+          response: toJson(response.data, params.responseType)
         },
         url: response.request?._redirectable?._currentUrl ?? url
       };
@@ -51,8 +68,8 @@ export class RestClient extends Client {
         statusCode: error.response?.status ?? 500,
         message: error.message,
         raw: {
-          request: typeof params.body === 'object' ? JSON.stringify(params.body) : '',
-          response: typeof body === 'object' ? JSON.stringify(body) : ''
+          request: toJson(params.body, params.responseType),
+          response: toJson(body, params.responseType)
         },
         url: error.response?.request?._redirectable?._currentUrl ?? url
       };

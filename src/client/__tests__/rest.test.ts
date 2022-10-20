@@ -253,5 +253,20 @@ describe('Rest client', () => {
         jest.restoreAllMocks();
       });
     });
+
+    describeRecording(
+      'Stream response',
+      () => {
+        it('Should get a list of users', async () => {
+          const data = await client.request<any>({
+            path: '/public/v1/users',
+            method: 'GET',
+            responseType: 'stream'
+          });
+          expect(data.statusCode).toBe(200);
+        });
+      },
+      CASSETTES_PATH
+    );
   });
 });

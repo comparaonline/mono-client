@@ -1,0 +1,140 @@
+[
+  {
+    "scope": "https://gorest.co.in:443",
+    "method": "GET",
+    "path": "/public/v1/users",
+    "body": "",
+    "status": 200,
+    "response": {
+      "meta": {
+        "pagination": {
+          "total": 2786,
+          "pages": 279,
+          "page": 1,
+          "limit": 10,
+          "links": {
+            "previous": null,
+            "current": "https://gorest.co.in/public/v1/users?page=1",
+            "next": "https://gorest.co.in/public/v1/users?page=2"
+          }
+        }
+      },
+      "data": [
+        {
+          "id": 2897,
+          "name": "Dwaipayana Verma",
+          "email": "dwaipayana_verma@keebler.co",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 2895,
+          "name": "Tanya Dhawan",
+          "email": "tanya_dhawan@greenholt-kautzer.com",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 2893,
+          "name": "Mahesh Sinha",
+          "email": "mahesh_sinha@raynor-swaniawski.name",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2892,
+          "name": "Naveen Talwar Ret.",
+          "email": "talwar_ret_naveen@luettgen.co",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 2891,
+          "name": "Ranjeet Shah Ret.",
+          "email": "ret_ranjeet_shah@stracke.co",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 2890,
+          "name": "Rajinder Acharya",
+          "email": "rajinder_acharya@upton-lesch.biz",
+          "gender": "male",
+          "status": "inactive"
+        },
+        {
+          "id": 2888,
+          "name": "Rev. Damayanti Ahuja",
+          "email": "rev_damayanti_ahuja@rodriguez-douglas.info",
+          "gender": "female",
+          "status": "active"
+        },
+        {
+          "id": 2887,
+          "name": "Kiran Nayar V",
+          "email": "kiran_nayar_v@rolfson.com",
+          "gender": "female",
+          "status": "inactive"
+        },
+        {
+          "id": 2886,
+          "name": "Prof. Adhiraj Namboothiri",
+          "email": "namboothiri_prof_adhiraj@doyle.name",
+          "gender": "male",
+          "status": "active"
+        },
+        {
+          "id": 2885,
+          "name": "Bodhan Talwar",
+          "email": "talwar_bodhan@hessel.org",
+          "gender": "female",
+          "status": "inactive"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Date",
+      "Wed, 19 Oct 2022 22:19:44 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Transfer-Encoding",
+      "chunked",
+      "Connection",
+      "close",
+      "Cache-Control",
+      "max-age=0, private, must-revalidate",
+      "etag",
+      "W/\"4114107b076a6b1c4e085c995b8ce5f2\"",
+      "referrer-policy",
+      "strict-origin-when-cross-origin",
+      "vary",
+      "Origin",
+      "x-content-type-options",
+      "nosniff",
+      "x-download-options",
+      "noopen",
+      "x-frame-options",
+      "SAMEORIGIN",
+      "x-permitted-cross-domain-policies",
+      "none",
+      "x-request-id",
+      "54305887-c058-4bad-8a84-7c23210ce34d",
+      "x-runtime",
+      "0.024222",
+      "x-xss-protection",
+      "0",
+      "CF-Cache-Status",
+      "DYNAMIC",
+      "Report-To",
+      "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=OuMccN6tyrfv3NJqNILiFLk4X6kJj%2FSkrIf87%2FlKinisjv%2FBOgLc5oguvkEPK4wz7H2z8Ki%2BTj9fDcrsGIFQqfioNjVjU6UhBaUd5ldCLuUb6YoO2oh36lSkpWXw1fw%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+      "NEL",
+      "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+      "Server",
+      "cloudflare",
+      "CF-RAY",
+      "75cce59ebf58ab2c-EZE",
+      "alt-svc",
+      "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+    ]
+  }
+]
