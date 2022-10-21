@@ -12,7 +12,7 @@ import {
   Retry
 } from '../interfaces';
 import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
-import { delay } from '../helpers';
+import { delay, toNonCircularObject } from '../helpers';
 
 const SUCCESS_STATUS_CODE = [200, 201, 202];
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
@@ -168,7 +168,11 @@ export class MonoClient<
         ? isSuccessfulResponse
         : typeof isSuccessfulResponse === 'string'
         ? new Error(isSuccessfulResponse)
-        : new Error(response.body != null ? JSON.stringify(response.body) : 'unknown error');
+        : new Error(
+            response.body != null
+              ? JSON.stringify(toNonCircularObject(response.body))
+              : 'unknown error'
+          );
 
     throw new RequestFail(this.config.type, request, response, error);
   }
