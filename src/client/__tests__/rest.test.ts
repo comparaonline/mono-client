@@ -268,5 +268,36 @@ describe('Rest client', () => {
       },
       CASSETTES_PATH
     );
+
+    describeRecording(
+      'JSON stream response',
+      () => {
+        it('Should get offers', (done) => {
+          const clientStream = new MonoClient({
+            type: 'rest',
+            baseUrl: 'http://host.docker.internal:4001'
+          });
+
+          let counter = 0;
+          clientStream
+            .streamRequest<any>({
+              path: '/quoter/car-insurance/co/quote/814c8320-460a-42b5-a205-04c8c2c466f4',
+              method: 'GET',
+              responseType: 'json-stream'
+            })
+            .then((data) => {
+              data.body.on('data', (json) => {
+                expect(json).toBeDefined();
+                counter++;
+              });
+              data.body.on('end', () => {
+                expect(counter).toBe(3);
+                done();
+              });
+            });
+        });
+      },
+      CASSETTES_PATH
+    );
   });
 });

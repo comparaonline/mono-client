@@ -1,5 +1,5 @@
 import { MonoClientRequest } from '../../interfaces';
-import { formatResponseErrorMessage, toNonCircularObject } from '..';
+import { formatResponseErrorMessage, safeJsonParse, toNonCircularObject } from '..';
 
 describe('Helpers', () => {
   describe('formatResponseErrorMessage method', () => {
@@ -54,6 +54,18 @@ describe('Helpers', () => {
         prop4: null,
         prop5: { child1: '' }
       });
+    });
+  });
+
+  describe('safeJsonParse', () => {
+    it('Should return an object', () => {
+      const json = '{ "test": "a" }';
+      expect(safeJsonParse(json)).toHaveProperty('test', 'a');
+    });
+
+    it('Should return null', () => {
+      const json = '{ "test: a';
+      expect(safeJsonParse(json)).toBe(null);
     });
   });
 });
