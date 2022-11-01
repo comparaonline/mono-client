@@ -86,6 +86,35 @@ async function getUser() {
 }
 ```
 
+### REST Stream
+
+If you are receiving data as stream and it content is a group of JSONs then you can use `streamRequest` with responseType `json-stream`. This will return a simple event emitter with each object
+
+```ts
+import { MonoClient } from '@comparaonline/mono-client';
+
+async function stream() {
+  const restClient = new MonoClient({
+    type: 'rest',
+    baseUrl: 'https://gorest.co.in'
+  });
+
+  const data = await restClient.streamRequest({
+    path: '/public/v1/users/{userId}',
+    method: 'GET',
+    responseType: 'json-stream'
+  });
+
+  data.body.on('data', (json) => {
+    // JSON as object
+  });
+
+  data.body.on('end', () => {
+    // End of stream (error included)
+  });
+}
+```
+
 ### Client advaced configuration
 
 ```ts
