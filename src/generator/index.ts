@@ -5,9 +5,9 @@ import {
   Callback,
   RestClientConfig,
   SoapClientConfig,
-  RestRequest,
   SoapRequest,
-  RequestInformation
+  RequestInformation,
+  RestRequestNormal
 } from '../interfaces';
 
 interface Params {
@@ -27,7 +27,7 @@ export class MonoClientGenerator {
     params: RestBaseClientConfig,
     serviceId?: string | number,
     requestId?: string | number
-  ): MonoClient<RestClientConfig, RestRequest>;
+  ): MonoClient<RestClientConfig, RestRequestNormal>;
   get(
     params: SoapBaseClientConfig,
     information?: RequestInformation
@@ -35,7 +35,7 @@ export class MonoClientGenerator {
   get(
     params: RestBaseClientConfig,
     information?: RequestInformation
-  ): MonoClient<RestClientConfig, RestRequest>;
+  ): MonoClient<RestClientConfig, RestRequestNormal>;
   get(
     params: SoapBaseClientConfig | RestBaseClientConfig,
     informationOrServiceId?: string | number | RequestInformation,

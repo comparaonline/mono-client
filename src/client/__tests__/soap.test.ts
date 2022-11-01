@@ -3,6 +3,7 @@ import {
   ClientBadConfiguration,
   MissingMandatoryParameter,
   MissingSoapMethod,
+  NotImplemented,
   RequestFail
 } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
@@ -325,5 +326,13 @@ describe('Change endpoint', () => {
     expect(data.statusCode).toBe(200);
     expect(data.body.MultiplyResult).toBe(20);
     jest.restoreAllMocks();
+  });
+  it('Force error for response type stream', async () => {
+    const promise = client.streamRequest<any>({
+      method: 'post',
+      responseType: 'json-stream',
+      path: ''
+    });
+    await expect(promise).rejects.toThrow(NotImplemented);
   });
 });

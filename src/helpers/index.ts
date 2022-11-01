@@ -35,3 +35,12 @@ export function toNonCircularObject(circularObject: object): object {
   }
   return JSON.parse(JSON.stringify(circularObject, replacer()));
 }
+
+export function safeJsonParse(input: string): object | null {
+  try {
+    return JSON.parse(input);
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}

@@ -23,4 +23,5 @@ export {
   Retry,
   ErrorHandler
 } from './interfaces';
+export * from './simple-stream';
 export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';

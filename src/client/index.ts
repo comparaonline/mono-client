@@ -4,19 +4,25 @@ import {
   RestClientConfig,
   SoapClientConfig,
   MonoClientRequest,
-  RestRequest,
   SoapRequest,
   MonoClientResponse,
   StatusCode,
   IsSuccessfulCallbackReturn,
-  Retry
+  Retry,
+  RestRequestNormal,
+  RestRequestWithJsonStream
 } from '../interfaces';
-import { InvalidMaxRetry, RequestFail, BodyParserFail } from '../exceptions';
+import { InvalidMaxRetry, RequestFail, BodyParserFail, NotImplemented } from '../exceptions';
 import { delay, toNonCircularObject } from '../helpers';
+import { SimpleStream } from '../simple-stream';
 
 const SUCCESS_STATUS_CODE = [200, 201, 202];
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
+}
+
+interface TemplateStreamResponse<T> extends Omit<MonoClientResponse, 'body'> {
+  body: SimpleStream<T>;
 }
 
 interface RequestAttempt {
@@ -27,7 +33,7 @@ interface RequestAttempt {
 
 export class MonoClient<
   C extends RestClientConfig | SoapClientConfig,
-  R = C extends SoapClientConfig ? SoapRequest : RestRequest
+  R = C extends SoapClientConfig ? SoapRequest : RestRequestNormal
 > {
   private client: SoapClient | RestClient;
   private retry: Retry;
@@ -122,11 +128,11 @@ export class MonoClient<
     return response.body;
   }
 
-  private async requestAttempt<T>({
+  private async requestAttempt<T, K extends TemplateResponse<T> | TemplateStreamResponse<T>>({
     request,
     maxAttempt,
     attempt
-  }: RequestAttempt): Promise<TemplateResponse<T>> {
+  }: RequestAttempt): Promise<K> {
     const startDate = new Date();
     const response = await this.client.request(request as any);
     const bodyParsed = this.bodyParser(request, response);
@@ -153,7 +159,7 @@ export class MonoClient<
     }
     response.body = bodyParsed;
     if (isSuccessful) {
-      return response;
+      return response as K;
     }
 
     if (attempt + 1 < maxAttempt && this.shouldRetry(request, response)) {
@@ -177,11 +183,29 @@ export class MonoClient<
     throw new RequestFail(this.config.type, request, response, error);
   }
 
-  async request<T>(params: R): Promise<TemplateResponse<T>> {
+  private getMaxAttempt(): number {
     if (this.retry.maxRetry < 0) {
       throw new InvalidMaxRetry(this.retry.maxRetry);
     }
-    const maxAttempt = this.retry.maxRetry + 1;
-    return this.requestAttempt({ request: params as any, maxAttempt, attempt: 0 });
+    return this.retry.maxRetry + 1;
+  }
+
+  async request<T>(params: R): Promise<TemplateResponse<T>> {
+    return this.requestAttempt<T, TemplateResponse<T>>({
+      request: params as any,
+      maxAttempt: this.getMaxAttempt(),
+      attempt: 0
+    });
+  }
+
+  async streamRequest<T>(params: RestRequestWithJsonStream): Promise<TemplateStreamResponse<T>> {
+    if (this.config.type === 'soap') {
+      throw new NotImplemented('Stream request for soap');
+    }
+    return this.requestAttempt<T, TemplateStreamResponse<T>>({
+      request: params as any,
+      maxAttempt: this.getMaxAttempt(),
+      attempt: 0
+    });
   }
 }

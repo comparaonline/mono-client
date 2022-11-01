@@ -90,14 +90,29 @@ export interface SoapRequest extends BaseRequest {
   soapHeaders?: Record<string, any>;
 }
 
-export interface RestRequest extends BaseRequest {
+export type JsonStream = 'json-stream';
+
+export type RestResponseType = ResponseType | JsonStream;
+
+export interface BaseRestRequest extends BaseRequest {
   path: string;
   overwriteBaseUrl?: string;
   method?: Method;
   pathParams?: PathParams;
   queryParams?: QueryParams;
   body?: any;
+}
+
+export interface RestRequestNormal extends BaseRestRequest {
   responseType?: ResponseType;
+}
+
+export interface RestRequestWithJsonStream extends BaseRestRequest {
+  responseType: JsonStream;
+}
+
+export interface RestRequest extends BaseRestRequest {
+  responseType?: RestResponseType;
 }
 
 export type MonoClientRequest = SoapRequest | RestRequest;
