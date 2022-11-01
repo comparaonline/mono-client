@@ -54,3 +54,9 @@ export class MissingMandatoryParameter extends Error {
     super(`Missing or invalid mandatory parameter - ${param}`);
   }
 }
+
+export class NotImplemented extends Error {
+  constructor(public method: string) {
+    super(`Not implemented - ${method}`);
+  }
+}
