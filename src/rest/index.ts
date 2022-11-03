@@ -21,6 +21,16 @@ function toJson(object: any, responseType?: RestResponseType): string {
   }
 }
 
+function getBody(body: any): any {
+  /* istanbul ignore next */
+  if (body?._readableState?.buffer?.head?.data instanceof Buffer) {
+    const bodyString = body._readableState.buffer.head.data.toString();
+    const bodyObject = safeJsonParse(bodyString);
+    return bodyObject ?? bodyString;
+  }
+  return body;
+}
+
 export class RestClient extends Client {
   constructor(public config: RestClientConfig) {
     super(config);
@@ -135,12 +145,8 @@ export class RestClient extends Client {
       };
     } catch (e: any) {
       const error: AxiosError = e;
-      const body = error.response?.data as any;
+      const body = getBody(error.response?.data);
 
-      /* istanbul ignore next */
-      if (body?._readableState?.buffer?.head?.data instanceof Buffer) {
-        error.message = body._readableState.buffer.head.data.toString();
-      }
       return {
         body,
         headers: error.response?.headers ?? {},
