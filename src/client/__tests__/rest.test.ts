@@ -147,11 +147,12 @@ describe('Rest client', () => {
       });
 
       it('should process a 204 successfully', async () => {
+        const status = 204;
         jest.spyOn(axios, 'request').mockImplementation(() => {
           return new Promise((resolve) => {
             resolve({
-              headers: {},
-              status: 204
+              status,
+              headers: {}
             });
           });
         });
@@ -163,7 +164,7 @@ describe('Rest client', () => {
             data: 'empty'
           }
         });
-        expect(data.body).toBe(RESPONSE_DATA);
+        expect(data.statusCode).toEqual(status);
         jest.restoreAllMocks();
       });
 
