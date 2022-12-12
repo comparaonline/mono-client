@@ -16,7 +16,7 @@ import { InvalidMaxRetry, RequestFail, BodyParserFail, NotImplemented } from '..
 import { delay, toNonCircularObject } from '../helpers';
 import { SimpleStream } from '../simple-stream';
 
-const SUCCESS_STATUS_CODE = [200, 201, 202];
+const SUCCESS_STATUS_CODE = [200, 201, 202, 204];
 interface TemplateResponse<T> extends Omit<MonoClientResponse, 'body'> {
   body: T;
 }

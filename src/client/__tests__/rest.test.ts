@@ -146,6 +146,28 @@ describe('Rest client', () => {
         jest.restoreAllMocks();
       });
 
+      it('should process a 204 successfully', async () => {
+        const status = 204;
+        jest.spyOn(axios, 'request').mockImplementation(() => {
+          return new Promise((resolve) => {
+            resolve({
+              status,
+              headers: {}
+            });
+          });
+        });
+
+        const data = await client.request<any>({
+          path: '/public/v1/users',
+          method: 'POST',
+          body: {
+            data: 'empty'
+          }
+        });
+        expect(data.statusCode).toEqual(status);
+        jest.restoreAllMocks();
+      });
+
       it("Shouldn't create an user", async () => {
         jest.spyOn(axios, 'request').mockImplementation(() => {
           return new Promise((resolve, reject) => {
