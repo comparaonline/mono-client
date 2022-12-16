@@ -3,7 +3,7 @@ import { StatusCode } from '../../interfaces';
 import { RestClient } from '../../rest';
 import { describeRecording } from '@comparaonline/test-helpers';
 import { MonoClient } from '../index';
-import { Client } from 'soap';
+import { Client } from 'soap-v2';
 
 const CASSETTES_PATH = 'client/base';
 describe('Mono client', () => {

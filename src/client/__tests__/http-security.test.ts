@@ -1,5 +1,5 @@
 import { describeRecording } from '@comparaonline/test-helpers';
-import { HttpClient } from 'soap';
+import { HttpClient } from 'soap-v2';
 import { MonoClient } from '..';
 import axios from 'axios';
 

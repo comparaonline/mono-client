@@ -24,4 +24,4 @@ export {
   ErrorHandler
 } from './interfaces';
 export * from './simple-stream';
-export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap';
+export { ClientSSLSecurity, ClientSSLSecurityPFX } from 'soap-v2';

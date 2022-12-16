@@ -1,6 +1,6 @@
 import { Client as BaseClient } from '../base-client';
 import { SoapClientConfig, SoapRequest, MonoClientResponse, Headers } from '../interfaces';
-import { Client, createClientAsync } from 'soap';
+import { Client, createClientAsync } from 'soap-v2';
 import {
   ClientBadConfiguration,
   MissingMandatoryParameter,

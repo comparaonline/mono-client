@@ -1,5 +1,5 @@
 import { Method, ResponseType } from 'axios';
-import { IOptions } from 'soap';
+import { IOptions } from 'soap-v2';
 
 export type PathParams = { [key: string]: string | number };
 export type QueryParams = { [key: string]: string | number | string[] | number[] };
@@ -50,7 +50,7 @@ export enum StatusCode {
 }
 
 export interface Headers {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 export interface HttpBasicSecurity {
