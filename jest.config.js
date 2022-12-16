@@ -1,11 +1,22 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  extensionsToTreatAsEsm: ['.ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest'
+    '^.+\\.[tj]s$': 'ts-jest'
   },
   roots: ['src/'],
-  testEnvironment: 'node',
   testRegex: 'src(/.*)?/__tests__/[^/]*\\.test\\.(ts|js)$',
+  moduleNameMapper: { '^uuid$': 'uuid' },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        allowJs: true
+      }
+    }
+  },
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{ts,js}',
@@ -22,6 +33,5 @@ module.exports = {
       lines: 100,
       statements: 100
     }
-  },
-  transformIgnorePatterns: ['node_modules/(?!${esModules})']
+  }
 };
