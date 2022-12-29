@@ -289,6 +289,12 @@ async function generatorTest() {
 
 ```
 
+## Debug 
+
+```bash
+MONO_CLIENT_DEBUG=true
+```
+
 ## Mono Client API
 
 TODO

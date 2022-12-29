@@ -40,7 +40,9 @@ export function safeJsonParse(input: string): object | null {
   try {
     return JSON.parse(input);
   } catch (e) {
-    console.error(e);
+    if (process.env.MONO_CLIENT_DEBUG === 'true') {
+      console.error(e);
+    }
     return null;
   }
 }
