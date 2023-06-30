@@ -79,7 +79,7 @@ export class RestClient extends Client {
 
         const parseAndSendData = (): void => {
           // This regex will look for any }{ (with or without new line in the middle)
-          const regex = /}{|}\\r\\n{|}\\n{/gm;
+          const regex = /}{|}\\r\\n{|}\\n{|}\r\n{|}\n{/gm;
           const index = stringQueue.search(regex);
 
           // I KNOW that we can avoid this IF/ELSE statement, but please keep it and preserve the comments "The Dev Remembers"
