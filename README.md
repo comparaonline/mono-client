@@ -289,6 +289,24 @@ async function generatorTest() {
 
 ```
 
+## Change SSL security options
+
+After upgrade to Node18 or higher HTTPS agent will disable unsafe legacy TLS renegotiation. So if you are setting `rejectUnauthorized` or ssl is self signed then you need to specify `secureOptions`. This won't be as default because lower versions of node won't need it
+
+```ts
+import crypto from 'crypto';
+
+const client = new MonoClient({
+  ssl: {
+      // this overwrites default HttpsAgent
+      type: 'ssl-reject', // ssl-pfx-security | ssl-security
+      rejectUnauthorized: false, // optional
+      secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT
+    }
+})
+
+```
+
 ## Debug 
 
 ```bash
