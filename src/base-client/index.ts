@@ -50,18 +50,21 @@ export abstract class Client {
         key,
         cert,
         ca,
-        rejectUnauthorized: ssl.rejectUnauthorized
+        rejectUnauthorized: ssl.rejectUnauthorized,
+        secureOptions: ssl.secureOptions
       });
     } else if (ssl.type === 'ssl-pfx-security') {
       const pfx = await this.readFile(ssl.pfx);
       return new Agent({
         pfx,
         passphrase: ssl.passphrase,
-        rejectUnauthorized: ssl.rejectUnauthorized
+        rejectUnauthorized: ssl.rejectUnauthorized,
+        secureOptions: ssl.secureOptions
       });
     } else {
       return new Agent({
-        rejectUnauthorized: ssl.rejectUnauthorized
+        rejectUnauthorized: ssl.rejectUnauthorized,
+        secureOptions: ssl.secureOptions
       });
     }
   }

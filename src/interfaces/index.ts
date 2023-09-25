@@ -190,6 +190,7 @@ export interface SslSecurity {
   /** Buffer or path, path will use process.cwd to get absolute path */
   ca?: Buffer | string;
   rejectUnauthorized?: boolean;
+  secureOptions?: number;
 }
 
 export interface SslPfxSecurity {
@@ -198,11 +199,13 @@ export interface SslPfxSecurity {
   pfx: string | Buffer;
   passphrase?: string;
   rejectUnauthorized?: boolean;
+  secureOptions?: number;
 }
 
 export interface SSLReject {
   type: 'ssl-reject';
   rejectUnauthorized: boolean;
+  secureOptions?: number;
 }
 
 type SSL = SslSecurity | SslPfxSecurity | SSLReject;
