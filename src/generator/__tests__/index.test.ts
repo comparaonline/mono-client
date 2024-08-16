@@ -1,5 +1,6 @@
 import { MonoClientGenerator } from '..';
 import { describeRecording } from '@comparaonline/test-helpers';
+import { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios';
 import { HttpClient } from 'soap-v2';
 
 const CASSETTES_PATH = 'generator';
@@ -82,8 +83,8 @@ describe('Client generator', () => {
           data: result,
           status: 200,
           statusText: 'success',
-          headers: {},
-          config: {}
+          headers: {} as AxiosResponseHeaders,
+          config: {} as InternalAxiosRequestConfig
         };
         if (args[0] !== 'https:newHost') {
           response.status = 500;

@@ -1,4 +1,4 @@
-import { Method, ResponseType } from 'axios';
+import { AxiosHeaders, Method, ResponseType } from 'axios';
 import { IOptions } from 'soap-v2';
 
 export type PathParams = { [key: string]: string | number };
@@ -50,7 +50,7 @@ export enum StatusCode {
 }
 
 export interface Headers {
-  [key: string]: string | undefined;
+  [key: string]: AxiosHeaders | string | string[] | number | boolean | null | undefined;
 }
 
 export interface HttpBasicSecurity {
