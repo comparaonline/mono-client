@@ -77,7 +77,9 @@ export class RestClient extends Client {
         // All of our JSON will end here
         let stringQueue = '';
 
-        const parseAndSendData = (): void => {
+        // this function originally it was called parseAndSendData
+        // It doesn't change its purpose, this is just a tribute to Rodri for his great work in Compara
+        const parseAndSendDataByRodri = (): void => {
           // This regex will look for any }{ (with or without new line in the middle)
           const regex = /}{|}\\r\\n{|}\\n{|}\r\n{|}\n{/gm;
           const index = stringQueue.search(regex);
@@ -116,7 +118,7 @@ export class RestClient extends Client {
             stringQueue = stringQueue.slice(stringQueue.indexOf('{', index));
             if (stringQueue.trim().length > 0) {
               // Repeat the process if our queue is not empty
-              parseAndSendData();
+              parseAndSendDataByRodri();
             }
           }
         };
@@ -129,7 +131,7 @@ export class RestClient extends Client {
           // We will just concatenate all of them until we can handle them
           stringQueue += data.toString();
           // This function will do the hard work
-          parseAndSendData();
+          parseAndSendDataByRodri();
         });
       }
 
