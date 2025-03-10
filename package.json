@@ -36,7 +36,7 @@
     "soap"
   ],
   "dependencies": {
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "soap-v2": "^1.0.0"
   },
   "devDependencies": {
