@@ -3,3 +3,6 @@ node_modules
 build
 coverage
 src/tester.ts
+.idea/
+.vscode/
+.claude/settings.local.json
