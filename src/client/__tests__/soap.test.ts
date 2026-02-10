@@ -7,7 +7,6 @@ import {
   RequestFail
 } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
-import { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios';
 import { join } from 'path';
 import { HttpClient } from 'soap';
 
@@ -275,8 +274,8 @@ describe('Change endpoint', () => {
         data: result,
         status: 200,
         statusText: 'success',
-        headers: {} as AxiosResponseHeaders,
-        config: {} as InternalAxiosRequestConfig
+        headers: {} as any,
+        config: {} as any
       };
       if (args[0] !== 'https:newHost') {
         response.status = 500;
@@ -306,8 +305,8 @@ describe('Change endpoint', () => {
         data: result,
         status: 200,
         statusText: 'success',
-        headers: {} as AxiosResponseHeaders,
-        config: {} as InternalAxiosRequestConfig
+        headers: {} as any,
+        config: {} as any
       };
       if (args[0] !== 'https:newHost') {
         response.status = 500;

@@ -83,8 +83,8 @@ describe('Client generator', () => {
           data: result,
           status: 200,
           statusText: 'success',
-          headers: {} as AxiosResponseHeaders,
-          config: {} as InternalAxiosRequestConfig
+          headers: {} as any,
+          config: {} as any
         };
         if (args[0] !== 'https:newHost') {
           response.status = 500;
