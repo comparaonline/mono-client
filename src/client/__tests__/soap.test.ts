@@ -7,8 +7,9 @@ import {
   RequestFail
 } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
+import { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios';
 import { join } from 'path';
-import { HttpClient } from 'soap-v2';
+import { HttpClient } from 'soap';
 
 const CASSETTES_PATH = 'client/soap';
 const WSDL_PATH = join(__dirname, '../../test/factories/soap/wsdl.xml');
@@ -274,8 +275,8 @@ describe('Change endpoint', () => {
         data: result,
         status: 200,
         statusText: 'success',
-        headers: {} as any,
-        config: {} as any
+        headers: {} as AxiosResponseHeaders,
+        config: {} as InternalAxiosRequestConfig
       };
       if (args[0] !== 'https:newHost') {
         response.status = 500;
@@ -305,8 +306,8 @@ describe('Change endpoint', () => {
         data: result,
         status: 200,
         statusText: 'success',
-        headers: {} as any,
-        config: {} as any
+        headers: {} as AxiosResponseHeaders,
+        config: {} as InternalAxiosRequestConfig
       };
       if (args[0] !== 'https:newHost') {
         response.status = 500;
