@@ -43,7 +43,11 @@ pipeline {
           expression { return new_version() }
         }
       }
-      steps { publish() }
+      steps {
+        nvm("v24.13.1") {
+          publish()
+        }
+      }
     }
   }
   post { 
