@@ -1,6 +1,5 @@
 import { MonoClientGenerator } from '..';
 import { describeRecording } from '@comparaonline/test-helpers';
-import { AxiosResponseHeaders, InternalAxiosRequestConfig } from 'axios';
 import { HttpClient } from 'soap';
 
 const CASSETTES_PATH = 'generator';
