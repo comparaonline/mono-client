@@ -301,6 +301,7 @@ describe('Rest client', () => {
           });
 
           let counter = 0;
+          let finished = false;
           clientStream
             .streamRequest<any>({
               path: '/quoter/car-insurance/co/quote/814c8320-460a-42b5-a205-04c8c2c466f4',
@@ -313,6 +314,8 @@ describe('Rest client', () => {
                 counter++;
               });
               data.body.on('end', () => {
+                if (finished) return;
+                finished = true;
                 expect(counter).toBe(3);
                 done();
               });
