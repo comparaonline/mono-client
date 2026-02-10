@@ -8,7 +8,7 @@ import {
 } from '../../exceptions';
 import { describeRecording } from '@comparaonline/test-helpers';
 import { join } from 'path';
-import { HttpClient } from 'soap-v2';
+import { HttpClient } from 'soap';
 
 const CASSETTES_PATH = 'client/soap';
 const WSDL_PATH = join(__dirname, '../../test/factories/soap/wsdl.xml');

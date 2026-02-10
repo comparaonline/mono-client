@@ -1,5 +1,5 @@
 import { AxiosHeaders, Method, ResponseType } from 'axios';
-import { IOptions } from 'soap-v2';
+import { IOptions } from 'soap';
 
 export type PathParams = { [key: string]: string | number };
 export type QueryParams = { [key: string]: string | number | string[] | number[] };

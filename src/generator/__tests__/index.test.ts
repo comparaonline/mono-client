@@ -1,6 +1,6 @@
 import { MonoClientGenerator } from '..';
 import { describeRecording } from '@comparaonline/test-helpers';
-import { HttpClient } from 'soap-v2';
+import { HttpClient } from 'soap';
 
 const CASSETTES_PATH = 'generator';
 const businessUnit = 'CI';

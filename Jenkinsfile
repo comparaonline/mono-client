@@ -6,24 +6,35 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        nvm("v14.17.0") {
+        nvm("v24.13.1") {
           sh 'yarn install'
         }
       }
     }
     stage('Build') {
         steps {
-          nvm("v14.17.0") {
+          nvm("v24.13.1") {
             sh 'yarn build'
           }
         }
     }
     stage('Test') {
         steps {
-          nvm("v14.17.0") {
+          nvm("v24.13.1") {
             sh 'yarn test'
           }
         }
+    }
+    stage('Vulnerability Scan') {
+      when {
+        anyOf {
+          branch 'master'
+          expression { return env.BRANCH_NAME.startsWith('rc') }
+        }
+      }
+      steps {
+        trivy_scan()
+      }
     }
     stage('Publish') {
       when {
@@ -42,6 +53,13 @@ pipeline {
       }
     }
   }
+}
+
+def trivy_scan() {
+  cache_dir="${WORKSPACE}/trivy-cache"
+  sh "mkdir -p ${cache_dir}"
+  sh "aws s3 sync --profile=production s3://trivy-cache ${cache_dir} && unzip -o ${cache_dir}/trivy-cache.zip -d ${cache_dir}"
+  sh "trivy fs --cache-dir ${cache_dir} --ignore-unfixed --severity HIGH,CRITICAL --exit-code 1 ."
 }
 
 def published_version() {
